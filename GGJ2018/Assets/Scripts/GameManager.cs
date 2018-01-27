@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -16,17 +17,20 @@ public class GameManager : MonoBehaviour
 		public string FlavorTwo;
     }
 
-    public Monster[] monsters;
+    public List<Monster> monsters;
 	public InteractableObject[] hints;
+	[Tooltip("Filepath to the csv used for monster generation. Starts in the Assets folder. Ex: Assets/monsters.csv")]
+	public string monsterList;
 
 	// Use this for initialization
 	void Start ()
     {
-		if(monsters.Length == 0)
+		GenerateMonsters();
+
+		if(monsters.Count == 0)
         {
             Debug.LogError("There are no monsters to choose as escapees. Making a generic human escape instead.");
-			monsters = new Monster[]
-			{
+			monsters.Add(
 				new Monster
 				{
 					name = "Human",
@@ -36,11 +40,11 @@ public class GameManager : MonoBehaviour
 					minorStrength = "Air",
 					FlavorOne = "Hammer",
 					FlavorTwo = "Hat"
-				},
-			};
+				}
+			);
         }
 
-		Monster culprit = monsters[Random.Range(0,monsters.Length)];
+		Monster culprit = monsters[Random.Range(0,monsters.Count)];
 		Debug.Log("The escaped monster is " + culprit.name);
 
 		//Getting all of the spawners
@@ -95,5 +99,58 @@ public class GameManager : MonoBehaviour
 	void Update ()
     {
 		
+	}
+
+	void GenerateMonsters()
+	{
+		StreamReader reader;
+
+		try
+		{
+			reader = new StreamReader(monsterList);
+		}
+		catch (FileNotFoundException)
+		{
+			Debug.LogError("The monster file was not in the location specified! Aborting monster generation!");
+			return;
+		}
+
+		reader.ReadLine();
+		monsters = new List<Monster>();
+
+		while (!reader.EndOfStream)
+		{
+			string line = reader.ReadLine();
+			string[] words = line.Split(',');
+			Debug.Log("Parsing out line: " + line);
+
+			if (words.Length < 7)
+			{
+				Debug.LogError("The monster list isn't set up correctly.");
+			}
+			else
+			{
+
+				monsters.Add(new Monster
+				{
+					name = words[0],
+					majorWeakness = words[1],
+					minorWeakness = words[2],
+					majorStrength = words[3],
+					minorStrength = words[4],
+					FlavorOne = words[5],
+					FlavorTwo = words[6]
+				});
+
+				Debug.Log("Making a new monster." +
+					"\nName: " + words[0] +
+					"\nmajor weakness: " + words[1] +
+					"\n minor weakness: " + words[2] +
+					"\nmajor strength: " + words[3] +
+					"\nminor strength: " + words[4] +
+					"\nflavor one: " + words[5] +
+					"\n flavor two: " + words[6]);
+			}
+		}
 	}
 }
