@@ -22,21 +22,18 @@ public class InteractableObject : MonoBehaviour
 	{
 		objectRenderer = GetComponent<Renderer>();
 		objectRenderer.material = normalMaterial;
+		if(seeDistance <= 0)
+		{
+			seeDistance = 50;
+			Debug.LogError("The see distance of the " + gameObject.name + " is set incorrectly. Setting to " + seeDistance);
+		}
         gameObject.tag = tagName;
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		if(Input.GetKeyDown(KeyCode.H))
-		{
-			Highlight();
-		}
 
-		if(Input.GetKeyUp(KeyCode.H))
-		{
-			Unhighlight();
-		}
 	}
 
     

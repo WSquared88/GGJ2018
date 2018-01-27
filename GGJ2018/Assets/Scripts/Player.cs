@@ -17,14 +17,30 @@ public class Player : MonoBehaviour {
             //freeze character movement
         }
 	}
-    private void OnTriggerStay(Collider other)
+
+	private void OnTriggerEnter(Collider other)
+	{
+		Debug.Log("Something entered my collider");
+		if(other.tag == "Interactable")
+		{
+			Debug.Log("It was an interactible object");
+			InteractableObject interactible = other.GetComponent<InteractableObject>();
+			if (interactible)
+			{
+				Debug.Log("Highlighting the object");
+				interactible.Highlight();
+			}
+		}
+	}
+
+	private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "interactable")
+        if (other.tag == "Interactable")
         { 
             InteractableObject interact = other.GetComponent<InteractableObject>(); 
             if((gameObject.transform.position - other.gameObject.transform.position).magnitude <= interact.seeDistance)
             {
-                Debug.Log(interact.giveStats()[1]);
+                Debug.Log(interact.giveStats());
             }
         }
         else if(other.tag == "terminal")
@@ -37,4 +53,16 @@ public class Player : MonoBehaviour {
             }
         }
     }
+
+	private void OnTriggerExit(Collider other)
+	{
+		if (other.tag == "Interactable")
+		{
+			InteractableObject interactible = other.GetComponent<InteractableObject>();
+			if (interactible)
+			{
+				interactible.Unhighlight();
+			}
+		}
+	}
 }
