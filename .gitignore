@@ -1,3 +1,5 @@
 GGJ2018/Library/metadata/
 GGJ2018/Temp/
 GGJ2018/Library/
+*.sln
+*.csproj
