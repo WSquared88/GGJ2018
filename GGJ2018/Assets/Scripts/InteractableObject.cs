@@ -7,7 +7,7 @@ public struct Info
     public string clueName;
     public string flavorText;
     //weakness or strength
-    public string clueType;
+   // public string clueType;
 }
 public class InteractableObject : MonoBehaviour
 {

@@ -16,12 +16,14 @@ public class Player : MonoBehaviour {
         if (isInteracting == true)
         {
             //freeze character movement
+            gameObject.GetComponent<FirstPersonController>().enabled = false;
+            
         }
         else if(isInteracting==true && Input.GetKeyDown(KeyCode.Escape))
         {
             isInteracting = false;
             terminal.isInteracting = false;
-
+            gameObject.GetComponent<FirstPersonController>().enabled = true;
         }
 	}
 
