@@ -1,35 +1,45 @@
-#Unity Generated
+# =============== #
+# Unity generated #
+# =============== #
 [Tt]emp/
-[Ll]ibrary/
-[Bb]uild/
-[Ee]xported[Oo]bj/
 [Oo]bj/
+[Bb]uild
+/[Bb]uilds/
+/[Ll]ibrary/
 sysinfo.txt
-
-#IDE generated
-*.csproj
-*.tmproj
-*.pidb
-*.userprefs
-*.svd
-*.suo
-*.user
-*.unityproj
-*.booproj
-*.swp
-
-#GIT generated
-*.orig
-*.orig.meta
-*.BASE.*
-*.LOCAL.*
-*.REMOTE.*
-*.MERGED.*
-
-#OS Generated
-.DS_Store
-.DS_Store?
+*.stackdump
+/Assets/AssetStoreTools*
+*.apk
+*.unitypackage
+ 
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+[Ee]xported[Oo]bj/
+.vs/
+/*.userprefs
+/*.csproj
+/*.pidb
+*.pidb.meta
+/*.suo
+/*.sln*
+/*.user
+/*.unityproj
+/*.booproj
+.consulo/
+/*.tmp
+/*.svd
+ 
+# ============ #
+# OS generated #
+# ============ #
+.DS_Store*
+._*
+.Spotlight-V100
 .Trashes
+Icon?
 ehthumbs.db
 [Tt]humbs.db
-._*
+[Dd]esktop.ini
+Corridor/Library/ShaderCache/
+Corridor/Library/metadata/
