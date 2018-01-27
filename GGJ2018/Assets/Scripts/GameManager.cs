@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     }
 
     public Monster[] monsters;
-	public GameObject[] hints;
+	public InteractableObject[] hints;
 
 	// Use this for initialization
 	void Start ()
@@ -49,9 +49,12 @@ public class GameManager : MonoBehaviour
 		if(hints.Length == 0)
 		{
 			Debug.LogError("There aren't any hints to pull from! Creating a default one");
-			hints = new GameObject[]
+			hints = new InteractableObject[]
 			{
-				new GameObject("Water"),
+				new InteractableObject()
+				{
+					tagName = "Water"
+				},
 			};
 		}
 
@@ -61,17 +64,17 @@ public class GameManager : MonoBehaviour
 		//GameObject minorStrength;
 		//GameObject FlavorOne;
 		//GameObject FlavorTwo;
-		List<GameObject> objsToSpawn = new List<GameObject>();
+		List<InteractableObject> objsToSpawn = new List<InteractableObject>();
 
 		Debug.Log("Looking for hints");
 		for (int i = 0;i<hints.Length;i++)
 		{
-			if(hints[i].name == culprit.majorWeakness
-				|| hints[i].name == culprit.minorWeakness
-				|| hints[i].name == culprit.majorStrength
-				|| hints[i].name == culprit.minorStrength
-				|| hints[i].name == culprit.FlavorOne
-				|| hints[i].name == culprit.FlavorTwo)
+			if(hints[i].tagName == culprit.majorWeakness
+				|| hints[i].tagName == culprit.minorWeakness
+				|| hints[i].tagName == culprit.majorStrength
+				|| hints[i].tagName == culprit.minorStrength
+				|| hints[i].tagName == culprit.FlavorOne
+				|| hints[i].tagName == culprit.FlavorTwo)
 			{
 				Debug.Log("Found a hint for the monster.");
 				objsToSpawn.Add(hints[i]);
@@ -82,7 +85,7 @@ public class GameManager : MonoBehaviour
 		{
 			if(i < spawners.Length)
 			{
-				Debug.Log("Spawning " + objsToSpawn[i].name + " at a spawner");
+				Debug.Log("Spawning " + objsToSpawn[i].tagName + " at a spawner");
 				Instantiate(objsToSpawn[i], spawners[i].transform.position, Quaternion.identity);
 			}
 		}
