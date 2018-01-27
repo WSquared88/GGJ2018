@@ -12,7 +12,7 @@ public class ClueInformation : MonoBehaviour {
 
     int rows = 25;//flavor text
     int columns = 1;//items
-    string[,] traits = new string[rows, columns];
+    string[,] traits = new string[25, 1];
 
 
 
