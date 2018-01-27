@@ -24,7 +24,7 @@ public class InteractableObject : MonoBehaviour
 	{
 		objectRenderer = GetComponent<Renderer>();
 		objectRenderer.material = normalMaterial;
-        gameObject.tag = tagName;
+        gameObject.tag = "Interactable";
 
 		if(seeDistance <= 0)
 		{
