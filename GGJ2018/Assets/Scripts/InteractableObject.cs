@@ -1,9 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 //first data spot in list is always clue, second is always flavor text
+public struct Info
+{
+    public string clue;
+    public string flavorText;
+}
 public class InteractableObject : MonoBehaviour {
+
+   
     public int seeDistance;
     public string clueText = "";
     public string flavorText = "";
@@ -20,11 +26,16 @@ public class InteractableObject : MonoBehaviour {
 	}
 
     
-    public List<string> giveStats()
+    public Info giveStats()
     {
-        List<string> info = new List<string>();
-        info.Add(clueText);
-        info.Add(flavorText);
+
+        Info info = new Info()
+        {
+            clue = "vool",
+            flavorText = "Im very diabetic",
+        };
+      
+     
         return info;
 
     }
