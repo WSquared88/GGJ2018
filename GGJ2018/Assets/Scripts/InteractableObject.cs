@@ -7,22 +7,36 @@ public struct Info
     public string clue;
     public string flavorText;
 }
-public class InteractableObject : MonoBehaviour {
-
-   
+public class InteractableObject : MonoBehaviour
+{
     public int seeDistance;
     public string clueText = "";
     public string flavorText = "";
     public string tagName = "";
-	// Use this for initialization
-	void Start () {
+	Renderer objectRenderer;
+	public Material normalMaterial;
+	public Material outlineMaterial;
 
+	// Use this for initialization
+	void Start ()
+	{
+		objectRenderer = GetComponent<Renderer>();
+		objectRenderer.material = normalMaterial;
         gameObject.tag = tagName;
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		
+	void Update ()
+	{
+		if(Input.GetKeyDown(KeyCode.H))
+		{
+			Highlight();
+		}
+
+		if(Input.GetKeyUp(KeyCode.H))
+		{
+			Unhighlight();
+		}
 	}
 
     
@@ -40,9 +54,19 @@ public class InteractableObject : MonoBehaviour {
 
     }
 
-        public virtual void assignValues(string clue, string flavor)
-    {
-        clueText = clue;
-        flavorText = flavor;
-    }
+	public virtual void assignValues(string clue, string flavor)
+	{
+		clueText = clue;
+		flavorText = flavor;
+	}
+
+	public void Highlight()
+	{
+		objectRenderer.material = outlineMaterial;
+	}
+
+	public void Unhighlight()
+	{
+		objectRenderer.material = normalMaterial;
+	}
 }
