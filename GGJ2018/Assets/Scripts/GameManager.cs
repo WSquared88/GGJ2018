@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public struct Monster
+{
+    public string name;
+    public string majorWeakness;
+    public string minorWeakness;
+    public string majorStrength;
+    public string minorStrength;
+    public string FlavorOne;
+    public string FlavorTwo;
+}
+
+
 public class GameManager : MonoBehaviour
 {
-	[System.Serializable]
-    public struct Monster
-    {
-		public string name;
-        public string majorWeakness;
-		public string minorWeakness;
-		public string majorStrength;
-		public string minorStrength;
-		public string FlavorOne;
-		public string FlavorTwo;
-    }
-
     public Monster[] monsters;
 	public InteractableObject[] hints;
 
