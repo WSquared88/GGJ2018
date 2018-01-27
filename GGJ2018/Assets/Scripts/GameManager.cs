@@ -15,18 +15,20 @@ public struct Monster
     public string FlavorTwo;
 }
 
-
 public class GameManager : MonoBehaviour
 {
-    public Monster[] monsters;
-	public InteractableObject[] hints;
+    List<Monster> monsters;
+	List<InteractableObject> hints;
 	[Tooltip("Filepath to the csv used for monster generation. Starts in the Assets folder. Ex: Assets/monsters.csv")]
-	public string monsterList;
+	public string monsterListPath;
+	[Tooltip("Filepath to the csv used for hint generation. Starts in the Assets folder. Ex: Assets/hints.csv")]
+	public string hintListPath;
 
 	// Use this for initialization
 	void Start ()
     {
 		GenerateMonsters();
+		GenerateHints();
 
 		if(monsters.Count == 0)
         {
@@ -51,10 +53,10 @@ public class GameManager : MonoBehaviour
 		//Getting all of the spawners
 		GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");
 
-		if(hints.Length == 0)
+		if(hints.Count == 0)
 		{
 			Debug.LogError("There aren't any hints to pull from! Creating a default one");
-			hints = new InteractableObject[]
+			hints = new List<InteractableObject>
 			{
 				new InteractableObject()
 				{
@@ -72,7 +74,7 @@ public class GameManager : MonoBehaviour
 		List<InteractableObject> objsToSpawn = new List<InteractableObject>();
 
 		Debug.Log("Looking for hints");
-		for (int i = 0;i<hints.Length;i++)
+		for (int i = 0;i<hints.Count;i++)
 		{
 			if(hints[i].tagName == culprit.majorWeakness
 				|| hints[i].tagName == culprit.minorWeakness
@@ -105,10 +107,11 @@ public class GameManager : MonoBehaviour
 	void GenerateMonsters()
 	{
 		StreamReader reader;
+		monsters = new List<Monster>();
 
 		try
 		{
-			reader = new StreamReader(monsterList);
+			reader = new StreamReader(monsterListPath);
 		}
 		catch (FileNotFoundException)
 		{
@@ -117,7 +120,6 @@ public class GameManager : MonoBehaviour
 		}
 
 		reader.ReadLine();
-		monsters = new List<Monster>();
 
 		while (!reader.EndOfStream)
 		{
@@ -151,6 +153,51 @@ public class GameManager : MonoBehaviour
 					"\nminor strength: " + words[4] +
 					"\nflavor one: " + words[5] +
 					"\n flavor two: " + words[6]);
+			}
+		}
+	}
+
+	void GenerateHints()
+	{
+		StreamReader reader;
+		hints = new List<InteractableObject>();
+
+		try
+		{
+			reader = new StreamReader(hintListPath);
+		}
+		catch (FileNotFoundException)
+		{
+			Debug.LogError("The hint file was not in the location specified! Aborting hint generation!");
+			return;
+		}
+
+		reader.ReadLine();
+
+		while (!reader.EndOfStream)
+		{
+			string line = reader.ReadLine();
+			string[] words = line.Split('\t');
+			Debug.Log("Parsing out line: " + line);
+
+			if (words.Length < 3)
+			{
+				Debug.LogError("The hint list isn't set up correctly.");
+			}
+			else
+			{
+
+				hints.Add(new InteractableObject
+				{
+					tagName = words[0],
+					flavorText = words[1],
+					seeDistance = int.Parse(words[2]),
+				});
+
+				Debug.Log("Making a new hint." +
+					"\nTag Name: " + words[0] +
+					"\nFlavor Text: " + words[1] +
+					"\n Sight Distance: " + words[2]);
 			}
 		}
 	}
