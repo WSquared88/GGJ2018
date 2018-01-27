@@ -20,7 +20,7 @@ public class Clue:MonoBehaviour{
 
 	// Use this for initialization
 	void Start () {
-        clueInfo = GameObject.Find("Canvas").GetComponent<ClueInformation>();
+        clueInfo = GameObject.Find("JournalPREFAB").GetComponent<ClueInformation>();
         isDiscovered = false;
        // setClueNum(clueNum);
         
@@ -44,7 +44,7 @@ public class Clue:MonoBehaviour{
 
     //sets clue name
     public void setClueName() {
-        clueName = GameObject.Find("Canvas").GetComponent<ClueInformation>().getName(clueNum);
+        clueName = GameObject.Find("JournalPREFAB").GetComponent<ClueInformation>().getName(clueNum);
         //print(clueName);
     
     }
@@ -71,7 +71,7 @@ public class Clue:MonoBehaviour{
 
     //sets Clue description
     public void setClueDesc() {
-        clueDescription = GameObject.Find("Canvas").GetComponent<ClueInformation>().getDesc(clueNum);
+        clueDescription = GameObject.Find("JournalPREFAB").GetComponent<ClueInformation>().getDesc(clueNum);
        // print(clueDescription);
 
     }

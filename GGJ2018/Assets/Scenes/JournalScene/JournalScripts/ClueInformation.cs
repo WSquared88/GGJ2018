@@ -12,7 +12,7 @@ public class ClueInformation : MonoBehaviour {
 
     int rows = 25;//flavor text
     int columns = 1;//items
-    string[,] traits = new string[25, 2];
+    string[,] traits = new string[25, 3];
 
 
 
@@ -20,30 +20,30 @@ public class ClueInformation : MonoBehaviour {
 	void Start () {
         //items
         traits[0, 0] = "Garlic";
-        traits[1, 0] = "sunlight";
-        traits[2, 0] = "blood";
-        traits[3, 0] = "bullet casings";
-        traits[4, 0] = "broken mirror";
-        traits[5, 0] = "fur";
-        traits[6, 0] = "bent steel";
-        traits[7, 0] = "wolfsbane";
-        traits[8, 0] = "silver";
-        traits[9, 0] = "rebreather";
-        traits[10, 0] = "fire";
-        traits[11, 0] = "water";
-        traits[12, 0] = "teeth";
-        traits[13, 0] = "can of tuna";
-        traits[14, 0] = "massive tracks";
-        traits[15, 0] = "ice/snow";
-        traits[16, 0] = "bloody meat";
-        traits[17, 0] = "multiple tracks";
-        traits[18, 0] = "damaged weapon";
-        traits[19, 0] = "bars";
-        traits[20, 0] = "harpoon ";
-        traits[21, 0] = "punctured bodies";
-        traits[22, 0] = "rocks";
-        traits[23, 0] = "scorched floor";
-        traits[24, 0] = "dust";
+        traits[1, 0] = "Sunlight";
+        traits[2, 0] = "Blood";
+        traits[3, 0] = "Bullet casings";
+        traits[4, 0] = "Broken Mirror";
+        traits[5, 0] = "Fur";
+        traits[6, 0] = "Bent Steel";
+        traits[7, 0] = "Wolfsbane";
+        traits[8, 0] = "Silver";
+        traits[9, 0] = "Rebreather";
+        traits[10, 0] = "Fire";
+        traits[11, 0] = "Water";
+        traits[12, 0] = "Teeth";
+        traits[13, 0] = "Can of Tuna";
+        traits[14, 0] = "Massive Tracks";
+        traits[15, 0] = "Ice/Snow";
+        traits[16, 0] = "Bloody Meat";
+        traits[17, 0] = "Multiple Tracks";
+        traits[18, 0] = "Damaged Weapon";
+        traits[19, 0] = "Bars";
+        traits[20, 0] = "Harpoon ";
+        traits[21, 0] = "Punctured Bodies";
+        traits[22, 0] = "Rocks";
+        traits[23, 0] = "Scorched Floor";
+        traits[24, 0] = "Dust";
         //flavor text
         traits[0, 1] = "Perfect for spaghetti.";
         traits[1, 1] = "Wow that's brighter than my future.";

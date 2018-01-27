@@ -18,8 +18,7 @@ public class Tab:MonoBehaviour{
 
 	// Use this for initialization
 	void Start () {
-        clue1Valid = false;
-        clue2Valid = false;
+        
 	}
 
 
@@ -36,22 +35,6 @@ public class Tab:MonoBehaviour{
         isDisplayed = !isDisplayed;
 
 
-        if (!isDisplayed)
-        {
-
-            tabOBJ.SetActive(false);
-            tabBG.SetActive(false);
-
-        }
-        else
-        {
-
-            tabOBJ.SetActive(true);
-            tabBG.SetActive(true);
-
-            
-
-        }
 
     }
 
@@ -65,37 +48,56 @@ public class Tab:MonoBehaviour{
 
     //set clue1
     public void setClue1(Clue sentClue) {
-        print("Clue1");
         clue1 = sentClue;
         clue1Valid = true;
-        fillScreen();
+
     }
 
-   //set clue2
-   public void setClue2(Clue sentClue){
+    //set clue2
+    public void setClue2(Clue sentClue){
 
         clue2 = sentClue;
         clue2Valid = true;
-        fillScreen();
+
 
     }
 
-    public void fillScreen() {
 
-        if (isDisplayed)
-        {
+
+
+
+    public void fillScreen() {
             if (clue1Valid)
             {
-                print("test");
+                
 
-                //GameObject.Find("Image1").GetComponent<Image>().sprite = 
+                //GameObject.Find("Image1").GetComponent<Image>().sprite = clue1.getImage();
                 GameObject.Find("Desc1").GetComponent<Text>().text = clue1.getClueDesc();
-            }
-            if (clue2Valid)
-            {
+                GameObject.Find("Title1").GetComponent<Text>().text = clue1.getClueName();
+
 
             }
+        if (clue2Valid)
+        {
+            //GameObject.Find("Image2").GetComponent<Image>().sprite = clue2.getImage();
+            GameObject.Find("Desc2").GetComponent<Text>().text = clue2.getClueDesc();
+            GameObject.Find("Title2").GetComponent<Text>().text = clue2.getClueName();
+
         }
+        else {
+            GameObject.Find("Desc2").GetComponent<Text>().text = "";
+            GameObject.Find("Title2").GetComponent<Text>().text = "";
+
+        }
+        
+
+    }
+
+
+    //get clue1
+    public Clue returnclue1() {
+
+        return clue1;
 
     }
 	
