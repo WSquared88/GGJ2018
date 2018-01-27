@@ -4,8 +4,10 @@ using UnityEngine;
 //first data spot in list is always clue, second is always flavor text
 public struct Info
 {
-    public string clue;
+    public string clueName;
     public string flavorText;
+    //weakness or strength
+    public string clueType;
 }
 public class InteractableObject : MonoBehaviour
 {
@@ -45,7 +47,7 @@ public class InteractableObject : MonoBehaviour
 
         Info info = new Info()
         {
-            clue = "vool",
+            clueName = "vool",
             flavorText = "Im very diabetic",
         };
       
