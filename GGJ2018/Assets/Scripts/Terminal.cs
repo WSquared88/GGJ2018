@@ -19,14 +19,19 @@ public class Terminal : InteractableObject {
 
     public void InteractWith()
     {
+        if (isInteracting == true)
+        {
+            Status();
+            isInteracting = false;
+        }
         
-        Status();
     }
     public void Status()
     {
         if (isReceiving == true)
         {
             Debug.Log("Receiving");
+            //call functions involving bringing the UI up
             isReceiving = false;
         }
         else
@@ -35,9 +40,11 @@ public class Terminal : InteractableObject {
 
         }
     }
+    //function to return the playstate of the terminal
     public bool PlayState()
     {
-        return isReceiving;
+
+        return isInteracting;
     }
 
     public void Menu()

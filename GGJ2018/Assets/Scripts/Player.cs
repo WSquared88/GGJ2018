@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
     public bool isInteracting = false;
+    public Terminal terminal;
 	// Use this for initialization
 	void Start () {
 		
@@ -15,6 +16,12 @@ public class Player : MonoBehaviour {
         if (isInteracting == true)
         {
             //freeze character movement
+        }
+        else if(isInteracting==true && Input.GetKeyDown(KeyCode.Escape))
+        {
+            isInteracting = false;
+            terminal.isInteracting = false;
+
         }
 	}
 
@@ -45,10 +52,12 @@ public class Player : MonoBehaviour {
         }
         else if(other.tag == "terminal")
         {
-            Terminal terminal = other.GetComponent<Terminal>();
+            terminal = other.GetComponent<Terminal>();
             if ((gameObject.transform.position - other.gameObject.transform.position).magnitude <= terminal.seeDistance && Input.GetKeyDown(KeyCode.E))
             {
                 isInteracting = true;
+                terminal.isInteracting = true;
+                terminal.InteractWith();
                 Debug.Log(terminal.tag);
             }
         }

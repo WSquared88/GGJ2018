@@ -4,8 +4,10 @@ using UnityEngine;
 //first data spot in list is always clue, second is always flavor text
 public struct Info
 {
-    public string clue;
+    public string clueName;
     public string flavorText;
+    //weakness or strength
+    public string clueType;
 }
 public class InteractableObject : MonoBehaviour
 {
@@ -22,18 +24,21 @@ public class InteractableObject : MonoBehaviour
 	{
 		objectRenderer = GetComponent<Renderer>();
 		objectRenderer.material = normalMaterial;
-		if(seeDistance <= 0)
-		{
-			seeDistance = 50;
-			Debug.LogError("The see distance of the " + gameObject.name + " is set incorrectly. Setting to " + seeDistance);
-		}
         gameObject.tag = tagName;
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
+		if(Input.GetKeyDown(KeyCode.H))
+		{
+			Highlight();
+		}
 
+		if(Input.GetKeyUp(KeyCode.H))
+		{
+			Unhighlight();
+		}
 	}
 
     
@@ -42,7 +47,7 @@ public class InteractableObject : MonoBehaviour
 
         Info info = new Info()
         {
-            clue = "vool",
+            clueName = "vool",
             flavorText = "Im very diabetic",
         };
       
