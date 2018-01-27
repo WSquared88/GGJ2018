@@ -2,12 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour
+{
     public bool isInteracting = false;
     public Terminal terminal;
+	Camera camera;
+	public float sightConeRadius;
 	// Use this for initialization
-	void Start () {
-		
+	void Start ()
+	{
+		camera = GetComponent<Camera>();
+		if (!camera)
+		{
+			Debug.LogError("There is no camera here!");
+		}
+
+		if (sightConeRadius <= 0)
+		{
+			sightConeRadius = 35;
+			Debug.LogError("The sight line isn't set correctly. Setting to " + sightConeRadius);
+		}
 	}
 	
 	// Update is called once per frame
@@ -25,52 +39,69 @@ public class Player : MonoBehaviour {
         }
 	}
 
+	bool CanSeeInteractable(InteractableObject interactable, Collider interactableCollider)
+	{
+		Vector3 playerToObject = interactable.transform.position - transform.position;
+		float dot = Vector3.Dot(playerToObject.normalized, camera.transform.forward);
+		float degreesAwayFromForward = Mathf.Acos(dot) * Mathf.Rad2Deg;
+		//Debug.Log("The interactable is close, but is it in front of me?");
+
+		if (degreesAwayFromForward <= sightConeRadius * 2)
+		{
+			Debug.Log("The object is in front of the player, but is something in the way?");
+			RaycastHit hit;
+			Physics.Raycast(camera.transform.position, playerToObject, out hit);
+			return hit.collider == interactableCollider;
+		}
+
+		return false;
+	}
+
 	private void OnTriggerEnter(Collider other)
 	{
-		Debug.Log("Something entered my collider");
-		if(other.tag == "Interactable")
-		{
-			Debug.Log("It was an interactible object");
-			InteractableObject interactible = other.GetComponent<InteractableObject>();
-			if (interactible)
-			{
-				Debug.Log("Highlighting the object");
-				interactible.Highlight();
-			}
-		}
+
 	}
 
 	private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Interactable")
-        { 
-            InteractableObject interact = other.GetComponent<InteractableObject>(); 
-            if((gameObject.transform.position - other.gameObject.transform.position).magnitude <= interact.seeDistance)
-            {
-                Debug.Log(interact.giveStats());
-            }
-        }
-        else if(other.tag == "terminal")
-        {
-            terminal = other.GetComponent<Terminal>();
-            if ((gameObject.transform.position - other.gameObject.transform.position).magnitude <= terminal.seeDistance && Input.GetKeyDown(KeyCode.E))
-            {
-                isInteracting = true;
-                terminal.isInteracting = true;
-                terminal.InteractWith();
-                Debug.Log(terminal.tag);
-            }
-        }
-    }
+		if (other.tag == "Interactable")
+		{
+			Debug.Log("There is an interactable nearby.");
+			InteractableObject interact = other.GetComponent<InteractableObject>();
+			if (CanSeeInteractable(interact, other))
+			{
+				interact.Highlight();
+				Vector3 playerToObject = interact.transform.position - transform.position;
+				if (playerToObject.magnitude <= interact.seeDistance)
+				{
+					Debug.Log("The interactable is close enough to add to our journal.");
+					Debug.Log(interact.giveStats());
+				}
+			}
+			else
+			{
+				interact.Unhighlight();
+			}
+		}
+		else if (other.tag == "Terminal")
+		{
+			Terminal terminal = other.GetComponent<Terminal>();
+			if (CanSeeInteractable(terminal, other) && Input.GetKeyDown(KeyCode.E))
+			{
+				isInteracting = true;
+				Debug.Log(terminal.tag);
+			}
+		}
+	}
 
 	private void OnTriggerExit(Collider other)
 	{
 		if (other.tag == "Interactable")
 		{
-			InteractableObject interactible = other.GetComponent<InteractableObject>();
-			if (interactible)
+			InteractableObject interactable = other.GetComponent<InteractableObject>();
+			if (interactable)
 			{
-				interactible.Unhighlight();
+				interactable.Unhighlight();
 			}
 		}
 	}
