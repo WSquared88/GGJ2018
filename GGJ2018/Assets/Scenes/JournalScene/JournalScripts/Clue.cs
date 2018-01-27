@@ -28,7 +28,7 @@ public class Clue : MonoBehaviour {
     public void setClueNum(int sentClueNum) {
         clueNum = sentClueNum;
         setClueName();
-        setClueImage();
+       // setClueImage();
         setClueDesc();
 
     }
@@ -52,10 +52,10 @@ public class Clue : MonoBehaviour {
     }
 
     //sets clue Image, goes through potential objects and then selects the corresponding sprite
-    public void setClueImage() {
-        clueImage.sprite = clueInfo.getImage(clueNum);
+    //public void setClueImage() {
+        //clueImage.sprite = clueInfo.getImage(clueNum);
 
-    }
+   // }
 
 
     //set journal Image

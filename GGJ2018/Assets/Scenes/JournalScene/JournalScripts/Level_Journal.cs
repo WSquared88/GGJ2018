@@ -26,7 +26,12 @@ public class Level_Journal : MonoBehaviour {
         createTabs();
         isSolved = false;
 
-	}
+        GameObject.Find("Tab1_grey").SetActive(false);
+        GameObject.Find("Tab2_grey").SetActive(true);
+        GameObject.Find("Tab3_grey").SetActive(true);
+
+
+    }
 
 
     //get the number of clues for the level
@@ -92,7 +97,18 @@ public class Level_Journal : MonoBehaviour {
                     createTabs();
                     tabCount++;
                     tabList[tabCount].setClue1(tempClue);
+                if (tabCount == 1)
+                {
+
+                    GameObject.Find("Tab2_grey").SetActive(false);
+
                 }
+                else if (tabCount == 2) {
+
+                    GameObject.Find("Tab3_grey").SetActive(false);
+
+                }
+            }
             }
     
     }
