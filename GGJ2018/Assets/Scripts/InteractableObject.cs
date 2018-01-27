@@ -24,7 +24,13 @@ public class InteractableObject : MonoBehaviour
 	{
 		objectRenderer = GetComponent<Renderer>();
 		objectRenderer.material = normalMaterial;
-        gameObject.tag = tagName;
+        gameObject.tag = "Interactable";
+
+		if(seeDistance <= 0)
+		{
+			seeDistance = 5;
+			Debug.LogError("The sight distance wasn't set. Setting it to " + seeDistance);
+		}
 	}
 	
 	// Update is called once per frame

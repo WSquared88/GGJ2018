@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class Clue : MonoBehaviour {
+public class Clue:MonoBehaviour{
 
     int clueNum;
 
@@ -16,11 +16,14 @@ public class Clue : MonoBehaviour {
 
     public Sprite sprite1;
 
-    public ClueInformation clueInfo;
+    ClueInformation clueInfo;
 
 	// Use this for initialization
 	void Start () {
+        clueInfo = GameObject.Find("JournalPREFAB").GetComponent<ClueInformation>();
         isDiscovered = false;
+       // setClueNum(clueNum);
+        
         
 	}
 
@@ -41,7 +44,8 @@ public class Clue : MonoBehaviour {
 
     //sets clue name
     public void setClueName() {
-        clueName = clueInfo.getName(clueNum);
+        clueName = GameObject.Find("JournalPREFAB").GetComponent<ClueInformation>().getName(clueNum);
+        //print(clueName);
     
     }
     
@@ -67,7 +71,15 @@ public class Clue : MonoBehaviour {
 
     //sets Clue description
     public void setClueDesc() {
-        clueInfo.getDesc(clueNum);
+        clueDescription = GameObject.Find("JournalPREFAB").GetComponent<ClueInformation>().getDesc(clueNum);
+       // print(clueDescription);
+
+    }
+
+    //gets clue desc
+    public string getClueDesc() {
+
+        return clueDescription;
 
     }
 
