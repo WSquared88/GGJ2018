@@ -10,8 +10,12 @@ public class Terminal : InteractableObject {
     public Button optionOne;
     public Button optionTwo;
     public Button optionThree;
+    public Text scoreStuff;
     public List<string> guesses;
     public int menuScreenCount = 0;
+    GameManager managerScript;
+    public List<string> answers;
+
     
     
 	// Use this for initialization
@@ -21,11 +25,17 @@ public class Terminal : InteractableObject {
         isReceiving = true;
         //gameObject.tag = tagName;
         isInteracting = false;
-        Menu();
-        ChangeButtons("Hah", "Hahahaha", "HAHAHAHAHAHAHAHAHAHAH");
+        
+
         optionOne.gameObject.SetActive(true);
         optionTwo.gameObject.SetActive(true);
         optionThree.gameObject.SetActive(true);
+         GameObject manager = GameObject.Find("Game Manager");
+        if(manager != null)
+        {
+            managerScript = manager.GetComponent<GameManager>();
+        }
+        SelectClues(managerScript.Culprit.majorWeakness);
     }
 	
 	// Update is called once per frame
@@ -40,9 +50,7 @@ public class Terminal : InteractableObject {
             
         }
         canvas.SetActive(isInteracting);
-       // optionOne.onClick.AddListener((UnityEngine.Events.UnityAction)this.MenuToNext);
-       // optionTwo.onClick.AddListener((UnityEngine.Events.UnityAction)this.MenuToNext);
-       // optionThree.onClick.AddListener((UnityEngine.Events.UnityAction)this.MenuToNext);
+       
 
     }
 
@@ -76,11 +84,7 @@ public class Terminal : InteractableObject {
         return isInteracting;
     }
 
-    public void Menu()
-    {
-       
-        
-    }
+  
     public void ChangeButtons(string optionO, string optionT, string optionTr)
     {
         optionOne.GetComponentInChildren<Text>().text = optionO;
@@ -89,17 +93,89 @@ public class Terminal : InteractableObject {
     }
     public void MenuToNext()
     {
-        if (menuScreenCount < 4)
+        if (menuScreenCount == 0)
         {
-            ChangeButtons("Test " + menuScreenCount, "Test " + menuScreenCount, "Test " + menuScreenCount);
+            
             menuScreenCount++;
         }
-        else
+        else if (menuScreenCount == 1)
+        {
+            
+            menuScreenCount++;
+            SelectClues(managerScript.Culprit.minorWeakness);
+        }
+        else if (menuScreenCount == 2)
+        {
+            SelectClues(managerScript.Culprit.majorStrength);
+            menuScreenCount++;
+        }
+        else if (menuScreenCount == 3)
+        {
+            SelectClues(managerScript.Culprit.minorStrength);
+            menuScreenCount++;
+        }
+        
+        else if(menuScreenCount == 4)
         {
             optionTwo.GetComponentInChildren<Text>().text = "Submit";
             optionOne.gameObject.SetActive(false);
             optionThree.gameObject.SetActive(false);
+            answers.RemoveAt(0);
+            gameObject.GetComponent<Scoring>().Score(managerScript.Culprit, answers);
+            menuScreenCount++;
+            
         }
+        else if(menuScreenCount == 5)
+        {
+
+            optionTwo.GetComponentInChildren<Text>().text = "Continue";
+            menuScreenCount++;
+            //menuScreenCount = 0;
+        }
+        else if (menuScreenCount == 6)
+        {
+            isInteracting = false;
+        }
+    }
+    public void SelectClues(string correctAnswer)
+    {
+        List<InteractableObject> tempHints = managerScript.Hints;
+
+        List<string> buttonItems = new List<string>();
+        int i = 0;
+        while( i<2 )
+        {
+            int location = Random.Range(0, tempHints.Count);
+            string selection = tempHints[location].tagName;
+            if(selection != correctAnswer)
+            {
+                tempHints.RemoveAt(location);
+                buttonItems.Add(selection);
+                i++; 
+            }
+            else
+            {
+                tempHints.RemoveAt(location);
+               // buttonItems.Add(correctAnswer);
+            }
+            
+        }
+        buttonItems.Add(correctAnswer);
+
+        List<string> finalList = new List<string>();
+
+        for(int x = 0; x<3; x++)
+        {
+            int location = Random.Range(0, buttonItems.Count);
+            string finalSelection = buttonItems[location];
+            buttonItems.RemoveAt(location);
+            finalList.Add(finalSelection);
+        }
+        ChangeButtons(finalList[0], finalList[1], finalList[2]);
+    }
+    public void ClueSelected(string selected)
+    {
+        answers.Add(selected);
     }
 
    
