@@ -11,8 +11,8 @@ public class Tab : MonoBehaviour
     Clue clue1;
     Clue clue2;
 
-    bool clue1Valid;
-    bool clue2Valid;
+    public bool clue1Valid;
+    public bool clue2Valid;
 
     GameObject tabOBJ;
     GameObject tabBG;
@@ -55,6 +55,7 @@ public class Tab : MonoBehaviour
     public void setClue1(Clue sentClue)
     {
         clue1 = sentClue;
+        print("clue1 name: " + clue1.getClueName()+" hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
         clue1Valid = true;
 
     }
@@ -96,6 +97,8 @@ public class Tab : MonoBehaviour
             GameObject.Find("Image1").GetComponent<Image>().sprite = clue1.getImage();
             GameObject.Find("Desc1").GetComponent<Text>().text = clue1.getClueDesc();
             GameObject.Find("Title1").GetComponent<Text>().text = clue1.getClueName();
+
+           
 
 
         }
