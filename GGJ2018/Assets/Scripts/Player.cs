@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class Player : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class Player : MonoBehaviour
     public Terminal terminal;
 	Camera camera;
 	public float sightConeRadius;
+    public Level_Journal journal;
+	public GameObject canvas;
+	Descriptor reminderText;
+    
 	// Use this for initialization
 	void Start ()
 	{
@@ -22,6 +27,26 @@ public class Player : MonoBehaviour
 			sightConeRadius = 35;
 			Debug.LogError("The sight line isn't set correctly. Setting to " + sightConeRadius);
 		}
+        if (!journal) {
+            //Debug.LogError("Journal not found");
+            journal = GameObject.Find("JournalPREFAB").GetComponent<Level_Journal>();
+
+        }
+
+		GameObject canvas = GameObject.Find("Reminder Text");
+		if (canvas)
+		{
+			reminderText = canvas.GetComponent<Descriptor>();
+		}
+		else
+		{
+			Debug.LogError("The reminder text canvas isn't here!");
+		}
+
+		if(!reminderText)
+		{
+			Debug.LogError("The description canvas isn't attached!");
+		}
 	}
 	
 	// Update is called once per frame
@@ -30,12 +55,14 @@ public class Player : MonoBehaviour
         if (isInteracting == true)
         {
             //freeze character movement
+            GameObject.Find("FPSController").GetComponent<FirstPersonController>().enabled = false;
+         
         }
-        else if(isInteracting==true && Input.GetKeyDown(KeyCode.Escape))
+        else if(isInteracting==true &&Input.GetKeyDown(KeyCode.Tab))
         {
             isInteracting = false;
             terminal.isInteracting = false;
-
+            GameObject.Find("FPSController").GetComponent<FirstPersonController>().enabled = true;
         }
 	}
 
@@ -68,19 +95,31 @@ public class Player : MonoBehaviour
 		{
 			Debug.Log("There is an interactable nearby.");
 			InteractableObject interact = other.GetComponent<InteractableObject>();
-			if (CanSeeInteractable(interact, other))
+			if (interact)
 			{
-				interact.Highlight();
-				Vector3 playerToObject = interact.transform.position - transform.position;
-				if (playerToObject.magnitude <= interact.seeDistance)
+				if (CanSeeInteractable(interact, other))
 				{
-					Debug.Log("The interactable is close enough to add to our journal.");
-					Debug.Log(interact.giveStats());
+					interact.Highlight();
+					Vector3 playerToObject = interact.transform.position - transform.position;
+					if (playerToObject.magnitude <= interact.addToJournalDistance)
+					{
+						Debug.Log("The interactable is close enough to add to our journal.");
+						Info itemInfo = interact.giveStats();
+						Debug.Log(itemInfo);
+						reminderText.SetText(itemInfo.tagName);
+						reminderText.SetPosition(interact.transform.position);
+						reminderText.FadeIn();
+						int numInList = interact.giveStats().numberInList;
+						journal.addClue(numInList);
+
+
+					}
 				}
-			}
-			else
-			{
-				interact.Unhighlight();
+				else
+				{
+					reminderText.FadeOut();
+					interact.Unhighlight();
+				}
 			}
 		}
 		else if (other.tag == "Terminal")
@@ -102,6 +141,7 @@ public class Player : MonoBehaviour
 			if (interactable)
 			{
 				interactable.Unhighlight();
+				reminderText.FadeOut();
 			}
 		}
 	}

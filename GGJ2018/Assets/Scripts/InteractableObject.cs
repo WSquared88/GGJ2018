@@ -6,55 +6,68 @@ public struct Info
 {
     public string clueName;
     public string flavorText;
+    public int numberInList;
+	public string tagName;
     //weakness or strength
-    public string clueType;
+   // public string clueType;
 }
 public class InteractableObject : MonoBehaviour
 {
-    public int seeDistance;
+    public int addToJournalDistance;
     public string clueText = "";
     public string flavorText = "";
     public string tagName = "";
+    public int numberInList;
 	Renderer objectRenderer;
+	Renderer[] childrenRenderers;
 	public Material normalMaterial;
-	public Material outlineMaterial;
+	public Material strengthMaterial;
+	public Material weaknessMaterial;
+	Material outlineMaterial;
+	bool highlighted = false;
 
 	// Use this for initialization
 	void Start ()
 	{
 		objectRenderer = GetComponent<Renderer>();
+		childrenRenderers = GetComponentsInChildren<Renderer>();
 		objectRenderer.material = normalMaterial;
-        gameObject.tag = tagName;
 
-		if(seeDistance <= 0)
+		for (int i = 0; i < childrenRenderers.Length; i++)
 		{
-			seeDistance = 5;
-			Debug.LogError("The sight distance wasn't set. Setting it to " + seeDistance);
+			childrenRenderers[i].material = normalMaterial;
+		}
+
+		if(!strengthMaterial || !weaknessMaterial)
+		{
+			Debug.LogError("The good and bad materials need to be set up.");
+		}
+
+        gameObject.tag = "Interactable";
+
+		if(addToJournalDistance <= 0)
+		{
+			addToJournalDistance = 5;
+			Debug.LogError("The sight distance wasn't set. Setting it to " + addToJournalDistance);
 		}
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		if(Input.GetKeyDown(KeyCode.H))
-		{
-			Highlight();
-		}
 
-		if(Input.GetKeyUp(KeyCode.H))
-		{
-			Unhighlight();
-		}
 	}
 
     
     public Info giveStats()
     {
-
+		Debug.Log("The name is " + clueText);
         Info info = new Info()
         {
-            clueName = "vool",
-            flavorText = "Im very diabetic",
+            clueName = clueText,
+            flavorText = flavorText,
+			tagName = tagName,
+            numberInList = numberInList,
         };
       
      
@@ -70,11 +83,53 @@ public class InteractableObject : MonoBehaviour
 
 	public void Highlight()
 	{
-		objectRenderer.material = outlineMaterial;
+		if (!highlighted)
+		{
+			Debug.Log("Highlighting");
+
+			if(!outlineMaterial)
+			{
+				Debug.LogError("The outline material wasn't set when trying to highlight!");
+			}
+
+			objectRenderer.material = outlineMaterial;
+
+			for (int i = 0; i < childrenRenderers.Length; i++)
+			{
+				Debug.Log("Setting a children render on");
+				childrenRenderers[i].material = outlineMaterial;
+			}
+
+			highlighted = true;
+		}
 	}
 
 	public void Unhighlight()
 	{
-		objectRenderer.material = normalMaterial;
+		if (highlighted)
+		{
+			Debug.Log("Unhighlighting");
+			objectRenderer.material = normalMaterial;
+
+			for (int i = 0; i < childrenRenderers.Length; i++)
+			{
+				childrenRenderers[i].material = normalMaterial;
+			}
+
+			highlighted = false;
+		}
+	}
+
+	public void SetIsShaderStrong(bool isGoodAlignment)
+	{
+		Debug.Log("Setting the alignment to " + isGoodAlignment);
+		if(isGoodAlignment)
+		{
+			outlineMaterial = strengthMaterial;
+		}
+		else
+		{
+			outlineMaterial = weaknessMaterial;
+		}
 	}
 }

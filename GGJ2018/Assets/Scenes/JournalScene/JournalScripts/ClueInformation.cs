@@ -4,46 +4,48 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class ClueInformation : MonoBehaviour {
+public class ClueInformation : MonoBehaviour
+{
 
     //string[] clueNames;
     //string[] clueDescs;
     //Sprite[] clueSprites;
 
-    int rows = 25;//flavor text
-    int columns = 1;//items
+    int rows = 25; //flavor text
+    int columns = 1; //items
     string[,] traits = new string[25, 2];
 
+    Sprite[] clueImages = new Sprite[25];
 
-
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         //items
         traits[0, 0] = "Garlic";
-        traits[1, 0] = "sunlight";
-        traits[2, 0] = "blood";
-        traits[3, 0] = "bullet casings";
-        traits[4, 0] = "broken mirror";
-        traits[5, 0] = "fur";
-        traits[6, 0] = "bent steel";
-        traits[7, 0] = "wolfsbane";
-        traits[8, 0] = "silver";
-        traits[9, 0] = "rebreather";
-        traits[10, 0] = "fire";
-        traits[11, 0] = "water";
-        traits[12, 0] = "teeth";
-        traits[13, 0] = "can of tuna";
-        traits[14, 0] = "massive tracks";
-        traits[15, 0] = "ice/snow";
-        traits[16, 0] = "bloody meat";
-        traits[17, 0] = "multiple tracks";
-        traits[18, 0] = "damaged weapon";
-        traits[19, 0] = "bars";
-        traits[20, 0] = "harpoon ";
-        traits[21, 0] = "punctured bodies";
-        traits[22, 0] = "rocks";
-        traits[23, 0] = "scorched floor";
-        traits[24, 0] = "dust";
+        traits[1, 0] = "Sunlight";
+        traits[2, 0] = "Blood";
+        traits[3, 0] = "Bullet casings";
+        traits[4, 0] = "Broken Mirror";
+        traits[5, 0] = "Fur";
+        traits[6, 0] = "Bent Steel";
+        traits[7, 0] = "Wolfsbane";
+        traits[8, 0] = "Silver";
+        traits[9, 0] = "Rebreather";
+        traits[10, 0] = "Fire";
+        traits[11, 0] = "Water";
+        traits[12, 0] = "Teeth";
+        traits[13, 0] = "Can of Tuna";
+        traits[14, 0] = "Massive Tracks";
+        traits[15, 0] = "Ice/Snow";
+        traits[16, 0] = "Bloody Meat";
+        traits[17, 0] = "Multiple Tracks";
+        traits[18, 0] = "Damaged Weapon";
+        traits[19, 0] = "Bars";
+        traits[20, 0] = "Harpoon ";
+        traits[21, 0] = "Punctured Bodies";
+        traits[22, 0] = "Rocks";
+        traits[23, 0] = "Scorched Floor";
+        traits[24, 0] = "Dust";
         //flavor text
         traits[0, 1] = "Perfect for spaghetti.";
         traits[1, 1] = "Wow that's brighter than my future.";
@@ -70,31 +72,63 @@ public class ClueInformation : MonoBehaviour {
         traits[22, 1] = "Not ideal for skipping.";
         traits[23, 1] = "Rements from a fire.";
         traits[24, 1] = "We really need to clean in here more often.";
+
+        //images
+
+        clueImages[0]= Resources.Load<Sprite>("cat");
+        clueImages[1] = Resources.Load<Sprite>("cat");
+        clueImages[2] = Resources.Load<Sprite>("cat");
+        clueImages[3] = Resources.Load<Sprite>("cat");
+        clueImages[4] = Resources.Load<Sprite>("cat");
+        clueImages[5] = Resources.Load<Sprite>("cat");
+        clueImages[6] = Resources.Load<Sprite>("cat");
+        clueImages[7] = Resources.Load<Sprite>("cat");
+        clueImages[8] = Resources.Load<Sprite>("cat");
+        clueImages[9] = Resources.Load<Sprite>("cat");
+        clueImages[10] = Resources.Load<Sprite>("cat");
+        clueImages[11] = Resources.Load<Sprite>("cat");
+        clueImages[12] = Resources.Load<Sprite>("cat");
+        clueImages[13] = Resources.Load<Sprite>("cat");
+        clueImages[14] = Resources.Load<Sprite>("cat");
+        clueImages[15] = Resources.Load<Sprite>("cat");
+        clueImages[16] = Resources.Load<Sprite>("cat");
+        clueImages[17] = Resources.Load<Sprite>("cat");
+        clueImages[18] = Resources.Load<Sprite>("cat");
+        clueImages[19] = Resources.Load<Sprite>("cat");
+        clueImages[20] = Resources.Load<Sprite>("cat");
+        clueImages[21] = Resources.Load<Sprite>("cat");
+        clueImages[22] = Resources.Load<Sprite>("cat");
+        clueImages[23] = Resources.Load<Sprite>("cat");
+        clueImages[24] = Resources.Load<Sprite>("cat");
+
     }
 
     //returns the name of the object based on the number that corresponds to it
-    public string getName(int clueNumber) {
-        return traits[clueNumber,0];
+    public string getName(int clueNumber)
+    {
+        return traits[clueNumber, 0];
 
     }
 
     //returns the description of the object based on the number that corresponds to it
-    public string getDesc(int clueNumber) {
+    public string getDesc(int clueNumber)
+    {
 
-        return traits[clueNumber,1];
+        return traits[clueNumber, 1];
     }
 
     //returns sprite to be used for Image
-  //  public Sprite getImage(int clueNumber) {
+      public Sprite getImage(int clueNumber) {
 
-       // return traits[clueNumber,];
+             return clueImages[clueNumber];
+        
+        }
 
-//    }
 
 
+    // Update is called once per frame
+    void Update()
+    {
 
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    }
 }
