@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
+//using UnityEditor;
 using UnityStandardAssets.Characters.FirstPerson;
 
 
@@ -24,7 +24,7 @@ public class Journal : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        Debug.Log("Starting the Journal");
         if (!player) {
 
            // Debug.LogError("Player not found");

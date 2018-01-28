@@ -4,4 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Main Menu.unity
+    guid: 345198de2f65e794bb82f242001b97a7
+  - enabled: 1
+    path: Assets/Scenes/robLevelScene.unity
+    guid: 910bbdb96c08a7b45b38de35e17369cc

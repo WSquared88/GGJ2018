@@ -69,16 +69,24 @@ public class Player : MonoBehaviour
             terminal.isInteracting = false;
             GameObject.Find("FPSController").GetComponent<FirstPersonController>().enabled = true;
         }
-        if((gameObject.transform.position-terminalSpot.transform.position).magnitude<=5f && Input.GetKeyDown(KeyCode.E) && isInteracting == false) 
+        if((gameObject.transform.position-terminalSpot.transform.position).magnitude<=3f && Input.GetKeyDown(KeyCode.E) && isInteracting == false) 
         {
+            Application.Quit();
+            isInteracting = true;
             terminal.isInteracting = true;
             terminal.canvas.SetActive(terminal.isInteracting);
+            GameObject.Find("FPSController").GetComponent<FirstPersonController>().enabled = false;
+           // Cursor.visible = true;
+           // Cursor.lockState = CursorLockMode.Confined;
         }
         else if (isInteracting==true && Input.GetKeyDown(KeyCode.Escape))
         {
             terminal.isInteracting = false;
             isInteracting = false;
             terminal.canvas.SetActive(terminal.isInteracting);
+            GameObject.Find("FPSController").GetComponent<FirstPersonController>().enabled = true;
+            //Cursor.visible = false;
+          //  Cursor.lockState = CursorLockMode.None;
         }
 	}
 

@@ -51,6 +51,16 @@ public class Terminal : InteractableObject {
             
         }
         canvas.SetActive(isInteracting);
+        //if (isInteracting)
+        //{
+        //    Cursor.visible = true;
+        //    Cursor.lockState = CursorLockMode.None;
+        //}
+        //else
+        //{
+        //    Cursor.visible = false;
+        //    Cursor.lockState = CursorLockMode.Confined;
+        //}
        
 
     }

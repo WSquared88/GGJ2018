@@ -20,7 +20,7 @@ public class InteractableObject : MonoBehaviour
     public int numberInList;
 	Renderer objectRenderer;
 	Renderer[] childrenRenderers;
-	public Material normalMaterial;
+	Material normalMaterial;
 	public Material strengthMaterial;
 	public Material weaknessMaterial;
 	protected Material outlineMaterial;
@@ -31,7 +31,8 @@ public class InteractableObject : MonoBehaviour
 	{
 		objectRenderer = GetComponent<Renderer>();
 		childrenRenderers = GetComponentsInChildren<Renderer>();
-		objectRenderer.material = normalMaterial;
+        normalMaterial = objectRenderer.material;
+		//objectRenderer.material = normalMaterial;
 		for (int i = 0; i < childrenRenderers.Length; i++)
 		{
 			childrenRenderers[i].material = normalMaterial;

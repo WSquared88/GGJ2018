@@ -20,9 +20,9 @@ public class Level_Journal : MonoBehaviour
     Clue tempClue;
     public Clue clue;
 
-    Tab tab1;
-    Tab tab2;
-    Tab tab3;
+    public Tab tab1;
+    public Tab tab2;
+    public Tab tab3;
 
 
     public Sprite bgImg1;
@@ -37,13 +37,10 @@ public class Level_Journal : MonoBehaviour
 
     int waitingCount;
 
-
-
-    // Use this for initialization
-    void Start()
+    private void Awake()
     {
-
-        if (!theJournal) {
+        if (!theJournal)
+        {
             Debug.LogError("Journal not found");
             theJournal = GameObject.Find("JournalPREFAB").GetComponent<Journal>();
 
@@ -62,6 +59,13 @@ public class Level_Journal : MonoBehaviour
         tab2_button.onClick.AddListener(switchTo2);
         tab3_button = GameObject.Find("Tab3").GetComponent<Button>();
         tab3_button.onClick.AddListener(switchTo3);
+    }
+
+    // Use this for initialization
+    void Start()
+    {
+
+        
 
 
         isSolved = false;
@@ -183,9 +187,9 @@ public class Level_Journal : MonoBehaviour
     public void createTabs()
     {
 
-        tab1 = GameObject.Find("tabTest").GetComponent<Tab>();
-        tab2 = GameObject.Find("tabTest2").GetComponent<Tab>();
-        tab3 = GameObject.Find("tabTest3").GetComponent<Tab>();
+        //tab1 = GameObject.Find("tabTest").GetComponent<Tab>();
+        //tab2 = GameObject.Find("tabTest2").GetComponent<Tab>();
+        //tab3 = GameObject.Find("tabTest3").GetComponent<Tab>();
 
         tabList.Add(tab1);
         tabList.Add(tab2);
