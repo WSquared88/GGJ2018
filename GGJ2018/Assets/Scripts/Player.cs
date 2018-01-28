@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
 
         }
 
-		//GameObject canvas = GameObject.Find("Reminder Text");
+		GameObject canvas = GameObject.Find("Reminder Text");
 		if (canvas)
 		{
 			reminderText = canvas.GetComponent<Descriptor>();
@@ -94,28 +94,31 @@ public class Player : MonoBehaviour
 		{
 			Debug.Log("There is an interactable nearby.");
 			InteractableObject interact = other.GetComponent<InteractableObject>();
-			if (CanSeeInteractable(interact, other))
+			if (interact)
 			{
-				interact.Highlight();
-				Vector3 playerToObject = interact.transform.position - transform.position;
-				if (playerToObject.magnitude <= interact.addToJournalDistance)
+				if (CanSeeInteractable(interact, other))
 				{
-					Debug.Log("The interactable is close enough to add to our journal.");
-					Info itemInfo = interact.giveStats();
-					Debug.Log(itemInfo);
-					reminderText.SetText(itemInfo.tagName);
-					reminderText.SetPosition(interact.transform.position);
-					reminderText.FadeIn();
-                    int numInList = interact.giveStats().numberInList;
-                    journal.addClue(numInList);
+					interact.Highlight();
+					Vector3 playerToObject = interact.transform.position - transform.position;
+					if (playerToObject.magnitude <= interact.addToJournalDistance)
+					{
+						Debug.Log("The interactable is close enough to add to our journal.");
+						Info itemInfo = interact.giveStats();
+						Debug.Log(itemInfo);
+						reminderText.SetText(itemInfo.tagName);
+						reminderText.SetPosition(interact.transform.position);
+						reminderText.FadeIn();
+						int numInList = interact.giveStats().numberInList;
+						journal.addClue(numInList);
 
-                   
+
+					}
 				}
-			}
-			else
-			{
-				reminderText.FadeOut();
-				interact.Unhighlight();
+				else
+				{
+					reminderText.FadeOut();
+					interact.Unhighlight();
+				}
 			}
 		}
 		else if (other.tag == "Terminal")
