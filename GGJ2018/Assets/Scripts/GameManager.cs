@@ -246,11 +246,20 @@ public class GameManager : MonoBehaviour
 
 	}
 
-	Monster Culprit
+	public Monster Culprit
 	{
 		get
 		{
 			return culprit;
+            
 		}
+       
 	}
+   public List<InteractableObject> Hints
+    {
+        get
+        {
+            return hints;
+        }
+    }
 }
