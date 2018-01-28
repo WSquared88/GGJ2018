@@ -41,6 +41,11 @@ public class Level_Journal : MonoBehaviour
     void Start()
     {
 
+        if (!theJournal) {
+            Debug.LogError("Journal not found");
+            theJournal = GameObject.Find("JournalPREFAB").GetComponent<Journal>();
+
+        }
 
         clueCount = 0;
         foundCount = 0;

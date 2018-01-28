@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public Terminal terminal;
 	Camera camera;
 	public float sightConeRadius;
+    public Level_Journal journal;
 	public GameObject canvas;
 	Descriptor reminderText;
 	// Use this for initialization
@@ -25,6 +26,11 @@ public class Player : MonoBehaviour
 			sightConeRadius = 35;
 			Debug.LogError("The sight line isn't set correctly. Setting to " + sightConeRadius);
 		}
+        if (!journal) {
+            Debug.LogError("Journal not found");
+            journal = GameObject.Find("JournalPREFAB").GetComponent<Level_Journal>();
+
+        }
 
 		//GameObject canvas = GameObject.Find("Reminder Text");
 		if (canvas)
@@ -100,6 +106,10 @@ public class Player : MonoBehaviour
 					reminderText.SetText(itemInfo.tagName);
 					reminderText.SetPosition(interact.transform.position);
 					reminderText.FadeIn();
+                    int numInList = interact.giveStats().numberInList;
+                    journal.addClue(numInList);
+
+                   
 				}
 			}
 			else
