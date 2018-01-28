@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
 
-public class Journal : MonoBehaviour {
+public class Journal : MonoBehaviour
+{
 
 
     bool newLevelStart;
@@ -16,15 +17,18 @@ public class Journal : MonoBehaviour {
     GameObject journalView;
     bool isEnabled;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
 
         newLevelStart = false;
         journalView = GameObject.Find("JournalView");
         isEnabled = false;
         journalView.SetActive(isEnabled);
 
-       
+
+
+
 
 
     }
@@ -32,24 +36,37 @@ public class Journal : MonoBehaviour {
 
 
 
-    public bool getIsEnabled() {
+    public bool getIsEnabled()
+    {
 
         return isEnabled;
     }
 
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
 
-       
 
-        if (Input.GetKeyDown(KeyCode.Tab)) {
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
             journalView.SetActive(!isEnabled);
             isEnabled = !isEnabled;
-    }
 
 
-        
+        }
+
+
+
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            currentLevel.addClue(5);
+            currentLevel.discoverClue(5);
+        }
+
+
 
     }
 }

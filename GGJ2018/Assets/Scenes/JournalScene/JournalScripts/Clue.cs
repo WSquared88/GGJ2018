@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class Clue:MonoBehaviour{
+public class Clue : MonoBehaviour
+{
 
     int clueNum;
 
@@ -18,66 +19,74 @@ public class Clue:MonoBehaviour{
 
     ClueInformation clueInfo;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         clueInfo = GameObject.Find("JournalPREFAB").GetComponent<ClueInformation>();
         isDiscovered = false;
-       // setClueNum(clueNum);
-        
-        
-	}
+        // setClueNum(clueNum);
+
+
+    }
 
     //sets clueNum
-    public void setClueNum(int sentClueNum) {
+    public void setClueNum(int sentClueNum)
+    {
         clueNum = sentClueNum;
         setClueName();
-       // setClueImage();
+        // setClueImage();
         setClueDesc();
 
     }
 
-    public int getClueNum() {
+    public int getClueNum()
+    {
 
         return clueNum;
     }
 
 
     //sets clue name
-    public void setClueName() {
+    public void setClueName()
+    {
         clueName = GameObject.Find("JournalPREFAB").GetComponent<ClueInformation>().getName(clueNum);
         //print(clueName);
-    
+
     }
-    
+
     //returns clueName
-    public string getClueName() {
+    public string getClueName()
+    {
         return clueName;
 
     }
 
     //sets clue Image, goes through potential objects and then selects the corresponding sprite
     //public void setClueImage() {
-        //clueImage.sprite = clueInfo.getImage(clueNum);
+    //clueImage.sprite = clueInfo.getImage(clueNum);
 
-   // }
+    // }
 
 
     //set journal Image
-    public Image setJournalImage() {
+    public Image setJournalImage()
+    {
         return clueImage;
 
     }
 
 
     //sets Clue description
-    public void setClueDesc() {
+    public void setClueDesc()
+    {
         clueDescription = GameObject.Find("JournalPREFAB").GetComponent<ClueInformation>().getDesc(clueNum);
-       // print(clueDescription);
+        // print(clueDescription);
 
     }
 
     //gets clue desc
-    public string getClueDesc() {
+    public string getClueDesc()
+    {
 
         return clueDescription;
 
@@ -85,14 +94,16 @@ public class Clue:MonoBehaviour{
 
 
     //object is discovered
-    public void setIsDiscovered() {
+    public void setIsDiscovered()
+    {
 
         isDiscovered = true;
 
     }
 
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 }

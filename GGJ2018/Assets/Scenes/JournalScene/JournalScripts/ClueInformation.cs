@@ -4,20 +4,22 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class ClueInformation : MonoBehaviour {
+public class ClueInformation : MonoBehaviour
+{
 
     //string[] clueNames;
     //string[] clueDescs;
     //Sprite[] clueSprites;
 
-    int rows = 25;//flavor text
-    int columns = 1;//items
+    int rows = 25; //flavor text
+    int columns = 1; //items
     string[,] traits = new string[25, 3];
 
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         //items
         traits[0, 0] = "Garlic";
         traits[1, 0] = "Sunlight";
@@ -73,28 +75,31 @@ public class ClueInformation : MonoBehaviour {
     }
 
     //returns the name of the object based on the number that corresponds to it
-    public string getName(int clueNumber) {
-        return traits[clueNumber,0];
+    public string getName(int clueNumber)
+    {
+        return traits[clueNumber, 0];
 
     }
 
     //returns the description of the object based on the number that corresponds to it
-    public string getDesc(int clueNumber) {
+    public string getDesc(int clueNumber)
+    {
 
-        return traits[clueNumber,1];
+        return traits[clueNumber, 1];
     }
 
     //returns sprite to be used for Image
-  //  public Sprite getImage(int clueNumber) {
+    //  public Sprite getImage(int clueNumber) {
 
-       // return traits[clueNumber,];
+    // return traits[clueNumber,];
 
-//    }
+    //    }
 
 
 
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 }
