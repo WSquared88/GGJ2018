@@ -28,6 +28,7 @@ public class Scoring : MonoBehaviour {
         }
         return playerScore;
     }
+    
 
 	// Update is called once per frame
 	void Update () {

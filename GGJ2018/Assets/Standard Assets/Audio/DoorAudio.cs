@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DoorAudio : MonoBehaviour {
 
-    public AudioClip impact;
+    public AudioClip doorSound;
     public AudioSource audioSource;
 	// Use this for initialization
 	void Start () {
@@ -13,6 +13,6 @@ public class DoorAudio : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        audioSource.PlayOneShot(impact,.7f);
+        audioSource.PlayOneShot(doorSound,.7f);
 	}
 }

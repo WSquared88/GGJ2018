@@ -5,6 +5,8 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class Player : MonoBehaviour
 {
+    public AudioClip doorSound;
+    public AudioSource audioSource;
     public bool isInteracting = false;
     public Terminal terminal;
 	Camera camera;
@@ -88,8 +90,16 @@ public class Player : MonoBehaviour
 	{
 
 	}
+    public void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag=="doorAound")
+        {
+            audioSource.Play();
+            audioSource.Stop();
+        }
+    }
 
-	private void OnTriggerStay(Collider other)
+    private void OnTriggerStay(Collider other)
     {
 		if (other.tag == "Interactable")
 		{
