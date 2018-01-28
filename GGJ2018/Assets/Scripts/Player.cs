@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     public Terminal terminal;
 	Camera camera;
 	public float sightConeRadius;
-    Level_Journal journal;
+    public Level_Journal journal;
 	// Use this for initialization
 	void Start ()
 	{
@@ -24,6 +24,11 @@ public class Player : MonoBehaviour
 			sightConeRadius = 35;
 			Debug.LogError("The sight line isn't set correctly. Setting to " + sightConeRadius);
 		}
+        if (!journal) {
+            Debug.LogError("Journal not found");
+            journal = GameObject.Find("JournalPREFAB").GetComponent<Level_Journal>();
+
+        }
 	}
 	
 	// Update is called once per frame

@@ -23,8 +23,18 @@ public class Journal : MonoBehaviour
     void Start()
     {
 
-        
+        if (!player) {
 
+            Debug.LogError("Player not found");
+            //player = GameObject.Find("").GetComponent<Player>();
+        }
+
+        if (!currentLevel) {
+
+            Debug.LogError("currentlevel not found");
+            currentLevel = GameObject.Find("JournalPREFAB").GetComponent<Level_Journal>();
+        }
+    
         newLevelStart = false;
         journalView = GameObject.Find("JournalView");
         isEnabled = false;
