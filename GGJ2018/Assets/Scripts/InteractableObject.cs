@@ -6,45 +6,48 @@ public struct Info
 {
     public string clueName;
     public string flavorText;
+    public int numberInList;
     //weakness or strength
-    public string clueType;
+   // public string clueType;
 }
 public class InteractableObject : MonoBehaviour
 {
-    public int seeDistance;
+    public int addToJournalDistance;
     public string clueText = "";
     public string flavorText = "";
     public string tagName = "";
+    public int numberInList;
 	Renderer objectRenderer;
+	Renderer[] childrenRenderers;
 	public Material normalMaterial;
 	public Material outlineMaterial;
+	bool highlighted = false;
 
 	// Use this for initialization
 	void Start ()
 	{
 		objectRenderer = GetComponent<Renderer>();
+		childrenRenderers = GetComponentsInChildren<Renderer>();
 		objectRenderer.material = normalMaterial;
-        gameObject.tag = tagName;
 
-		if(seeDistance <= 0)
+		for (int i = 0; i < childrenRenderers.Length; i++)
 		{
-			seeDistance = 5;
-			Debug.LogError("The sight distance wasn't set. Setting it to " + seeDistance);
+			childrenRenderers[i].material = normalMaterial;
+		}
+
+        gameObject.tag = "Interactable";
+
+		if(addToJournalDistance <= 0)
+		{
+			addToJournalDistance = 5;
+			Debug.LogError("The sight distance wasn't set. Setting it to " + addToJournalDistance);
 		}
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-		if(Input.GetKeyDown(KeyCode.H))
-		{
-			Highlight();
-		}
 
-		if(Input.GetKeyUp(KeyCode.H))
-		{
-			Unhighlight();
-		}
 	}
 
     
@@ -55,6 +58,8 @@ public class InteractableObject : MonoBehaviour
         {
             clueName = "vool",
             flavorText = "Im very diabetic",
+            numberInList = numberInList,
+            
         };
       
      
@@ -70,11 +75,34 @@ public class InteractableObject : MonoBehaviour
 
 	public void Highlight()
 	{
-		objectRenderer.material = outlineMaterial;
+		if (!highlighted)
+		{
+			Debug.Log("Highlighting");
+			objectRenderer.material = outlineMaterial;
+
+			for (int i = 0; i < childrenRenderers.Length; i++)
+			{
+				Debug.Log("Setting a children render on");
+				childrenRenderers[i].material = outlineMaterial;
+			}
+
+			highlighted = true;
+		}
 	}
 
 	public void Unhighlight()
 	{
-		objectRenderer.material = normalMaterial;
+		if (highlighted)
+		{
+			Debug.Log("Unhighlighting");
+			objectRenderer.material = normalMaterial;
+
+			for (int i = 0; i < childrenRenderers.Length; i++)
+			{
+				childrenRenderers[i].material = normalMaterial;
+			}
+
+			highlighted = false;
+		}
 	}
 }

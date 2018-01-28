@@ -1,15 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Level_Journal:MonoBehaviour{
+public class Level_Journal : MonoBehaviour
+{
 
     int clueCount;
     int foundCount;
     int tabCount;
 
-    List <Clue> clueList = new List<Clue>();
-    List<Clue> foundClues = new List<Clue>();
+    List<Clue> clueList = new List<Clue>();
+    List<int> foundClues = new List<int>();
 
     bool isSolved;
 
@@ -18,60 +20,115 @@ public class Level_Journal:MonoBehaviour{
     Clue tempClue;
     public Clue clue;
 
-    public Tab tab1;
-    public Tab tab2;
-    public Tab tab3;
+    Tab tab1;
+    Tab tab2;
+    Tab tab3;
 
 
-	// Use this for initialization
-	void Start () {
+    public Sprite bgImg1;
+    public Sprite bgImg2;
+    public Sprite bgImg3;
+
+    Button tab1_button;
+    Button tab2_button;
+    Button tab3_button;
+
+    public Journal theJournal;
+
+    int waitingCount;
+
+    // Use this for initialization
+    void Start()
+    {
+
+        if (!theJournal) {
+            Debug.LogError("Journal not found");
+            theJournal = GameObject.Find("JournalPREFAB").GetComponent<Journal>();
+
+        }
+
         clueCount = 0;
         foundCount = 0;
         tabCount = 0;
+        waitingCount = 0;
 
         createTabs();
 
-       
+        tab1_button = GameObject.Find("Tab1").GetComponent<Button>();
+        tab1_button.onClick.AddListener(switchTo1);
+        tab2_button = GameObject.Find("Tab2").GetComponent<Button>();
+        tab2_button.onClick.AddListener(switchTo2);
+        tab3_button = GameObject.Find("Tab3").GetComponent<Button>();
+        tab3_button.onClick.AddListener(switchTo3);
+
 
         isSolved = false;
 
 
-        GameObject.Find("Tab1_grey").SetActive(false);
-        GameObject.Find("Tab2_grey").SetActive(true);
-        GameObject.Find("Tab3_grey").SetActive(true);
-
-        GameObject.Find("Tab2_BG").SetActive(false);
-        GameObject.Find("Tab3_BG").SetActive(false);
 
         tab1.isDisplayed = true;
 
-        addClue(5);
-        addClue(3);
-        addClue(16);
-        addClue(8);
-        addClue(13);
-        addClue(20);
 
-        discoverClue(3);
-        discoverClue(5);
-        discoverClue(16);
-        //discoverClue(8);
-        //discoverClue(13);
-        //discoverClue(20);
-        tab1.fillScreen();
+
+
+
+        switchTo1();
+
+    }
+
+    public List<Tab> getTabList()
+    {
+
+        return tabList;
+
     }
 
 
+    //switch to tab1
+    public void switchTo1()
+    {
+        GameObject.Find("Tabs_BG").GetComponent<Image>().sprite = bgImg1;
+        tab1.isDisplayed = true;
+        tab2.isDisplayed = false;
+        tab3.isDisplayed = false;
+
+        tabList[0].fillScreen();
+
+    }
+
+    public void switchTo2()
+    {
+        GameObject.Find("Tabs_BG").GetComponent<Image>().sprite = bgImg2;
+        tab2.isDisplayed = true;
+        tab1.isDisplayed = false;
+        tab3.isDisplayed = false;
+
+        tabList[1].fillScreen();
+
+
+    }
+    public void switchTo3()
+    {
+
+        GameObject.Find("Tabs_BG").GetComponent<Image>().sprite = bgImg3;
+        tab3.isDisplayed = true;
+        tab2.isDisplayed = false;
+        tab1.isDisplayed = false;
+        tabList[2].fillScreen();
+
+    }
+
     //get the number of clues for the level
-    public int getClueCount() {
+    public int getClueCount()
+    {
         return clueCount;
 
     }
 
 
     //adds clue to the List of clues; instantiated at begining of level
-    public void addClue(int clueNum) {
-
+    public void addClue(int clueNum)
+    {
         clueList.Add(Instantiate(clue));
         clueList[clueCount].setClueNum(clueNum);
         clueCount++;
@@ -79,69 +136,81 @@ public class Level_Journal:MonoBehaviour{
 
 
     //level has been solved
-    public void levelSolved() {
+    public void levelSolved()
+    {
 
         isSolved = true;
 
     }
 
     //get isSolved
-    public bool getIsSolved() {
+    public bool getIsSolved()
+    {
         return isSolved;
 
     }
 
     //creates tabs
-    public void createTabs() {
-        tabList.Add(Instantiate(tab1));
-        tabList.Add(Instantiate(tab2));
-        tabList.Add(Instantiate(tab3));
+    public void createTabs()
+    {
 
-        tab1.setTabOBJs(GameObject.Find("Tab1_obj"), GameObject.Find("Tab1_BG"));
-        tab2.setTabOBJs(GameObject.Find("Tab2_obj"), GameObject.Find("Tab2_BG"));
-        tab3.setTabOBJs(GameObject.Find("Tab3_obj"), GameObject.Find("Tab3_BG"));
+        tab1 = GameObject.Find("tabTest").GetComponent<Tab>();
+        tab2 = GameObject.Find("tabTest2").GetComponent<Tab>();
+        tab3 = GameObject.Find("tabTest3").GetComponent<Tab>();
 
-        //tab1.toggleDisplayed();
+        tabList.Add(tab1);
+        tabList.Add(tab2);
+        tabList.Add(tab3);
+
     }
 
     //item is found, increase foundCount
-    public void increaseFoundCount(int clueNum) {
-        
+    public void increaseFoundCount(int clueNum)
+    {
 
-        
 
-        for (int i = 0; i < clueCount; i++) {
+
+
+        for (int i = 0; i < clueCount; i++)
+        {
 
             if (clueList[i].getClueNum() == clueNum)
             {
 
-               tempClue = clueList[i];
+                tempClue = clueList[i];
             }
 
         }
 
-            if (foundCount <= 5){
-            if (foundCount == 0) {
+        if (foundCount <= 5)
+        {
+
+            if (foundCount == 0)
+            {
                 tabList[tabCount].setClue1(tempClue);
 
                 foundCount++;
             }
             else if (foundCount % 2 != 0)
             {
-
                 tabList[tabCount].setClue2(tempClue);
                 foundCount++;
+                if (foundCount > 5)
+                {
+
+                    isSolved = true;
+                }
             }
             else
             {
                 tabCount++;
                 tabList[tabCount].setClue1(tempClue);
                 foundCount++;
+
                 if (tabCount == 1)
                 {
 
                     GameObject.Find("Tab2_grey").SetActive(false);
-                    tabList[tabCount].setTabOBJs(GameObject.Find("Tab2_obj"), GameObject.Find("Tab2_BG"));
 
 
                 }
@@ -149,24 +218,50 @@ public class Level_Journal:MonoBehaviour{
                 {
 
                     GameObject.Find("Tab3_grey").SetActive(false);
-                    tabList[tabCount].setTabOBJs(GameObject.Find("Tab3_obj"), GameObject.Find("Tab3_BG"));
 
 
                 }
             }
-            }
-    
+        }
+
     }
 
     //discovered clue
-    public void discoverClue(int clueNum) {
-        increaseFoundCount(clueNum);
+    public void discoverClue(int clueNum)
+    {
+
+        if (theJournal.getIsEnabled())
+        {
+            increaseFoundCount(clueNum);
+
+
+        }
+        else
+        {
+
+            waitingCount++;
+            foundClues.Add(clueNum);
+
+        }
 
     }
 
 
     // Update is called once per frame
-    void Update () {
-		
-	}
+    void Update()
+    {
+        if (theJournal.getIsEnabled() && waitingCount > 0)
+        {
+
+            for (int i = 0; i < waitingCount; i++)
+            {
+                increaseFoundCount(foundClues[i]);
+
+            }
+            waitingCount = 0;
+            foundClues.Clear();
+            tabList[0].fillScreen();
+        }
+
+    }
 }

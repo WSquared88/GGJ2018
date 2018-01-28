@@ -5,10 +5,12 @@ using UnityEngine;
 public class Terminal : InteractableObject {
     private bool isReceiving;
     public bool isInteracting;
+    public int currentAlive;
 	// Use this for initialization
 	void Start () {
         tagName = "terminal";
         isReceiving = true;
+        gameObject.tag = tagName;
 	}
 	
 	// Update is called once per frame
@@ -50,6 +52,11 @@ public class Terminal : InteractableObject {
     public void Menu()
     {
         //calls eventual function for menu pop-up
+    }
+    //method for adjusting in the terminal how many are currently alive, does math based on success of choices.
+    public void HowSuccessful(int correct)
+    {
+        currentAlive = currentAlive - (currentAlive - correct);
     }
 
    
