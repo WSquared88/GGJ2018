@@ -73,11 +73,6 @@ public class Journal : MonoBehaviour
 
 
 
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            currentLevel.addClue(5);
-            currentLevel.discoverClue(5);
-        }
 
 
 
