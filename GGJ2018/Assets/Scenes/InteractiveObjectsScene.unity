@@ -417,12 +417,14 @@ MonoBehaviour:
   tagName: 
   numberInList: 0
   normalMaterial: {fileID: 0}
-  outlineMaterial: {fileID: 0}
+  strengthMaterial: {fileID: 0}
+  weaknessMaterial: {fileID: 0}
   isInteracting: 0
   canvas: {fileID: 1935127984}
   optionOne: {fileID: 200220436}
   optionTwo: {fileID: 1845538331}
   optionThree: {fileID: 1934074676}
+  scoreStuff: {fileID: 0}
   guesses: []
   menuScreenCount: 0
   answers: []
@@ -451,6 +453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectsFound: []
+  playerScore: 0
 --- !u!1 &1845538329 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1097229726436204, guid: 288011cbdf51efd4395bf6623939087a,

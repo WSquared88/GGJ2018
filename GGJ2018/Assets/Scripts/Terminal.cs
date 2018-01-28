@@ -128,12 +128,14 @@ public class Terminal : InteractableObject {
         else if(menuScreenCount == 5)
         {
 
-            optionTwo.GetComponentInChildren<Text>().text = "Continue";
+            optionTwo.GetComponentInChildren<Text>().text = "End Game";
+            
             menuScreenCount++;
             //menuScreenCount = 0;
         }
         else if (menuScreenCount == 6)
         {
+            Application.Quit();
             isInteracting = false;
         }
     }
