@@ -13,9 +13,9 @@ public class ClueInformation : MonoBehaviour
 
     int rows = 25; //flavor text
     int columns = 1; //items
-    string[,] traits = new string[25, 3];
+    string[,] traits = new string[25, 2];
 
-
+    Sprite[] clueImages = new Sprite[25];
 
     // Use this for initialization
     void Start()
@@ -72,6 +72,35 @@ public class ClueInformation : MonoBehaviour
         traits[22, 1] = "Not ideal for skipping.";
         traits[23, 1] = "Rements from a fire.";
         traits[24, 1] = "We really need to clean in here more often.";
+
+        //images
+
+        clueImages[0]= Resources.Load<Sprite>("cat");
+        clueImages[1] = Resources.Load<Sprite>("cat");
+        clueImages[2] = Resources.Load<Sprite>("cat");
+        clueImages[3] = Resources.Load<Sprite>("cat");
+        clueImages[4] = Resources.Load<Sprite>("cat");
+        clueImages[5] = Resources.Load<Sprite>("cat");
+        clueImages[6] = Resources.Load<Sprite>("cat");
+        clueImages[7] = Resources.Load<Sprite>("cat");
+        clueImages[8] = Resources.Load<Sprite>("cat");
+        clueImages[9] = Resources.Load<Sprite>("cat");
+        clueImages[10] = Resources.Load<Sprite>("cat");
+        clueImages[11] = Resources.Load<Sprite>("cat");
+        clueImages[12] = Resources.Load<Sprite>("cat");
+        clueImages[13] = Resources.Load<Sprite>("cat");
+        clueImages[14] = Resources.Load<Sprite>("cat");
+        clueImages[15] = Resources.Load<Sprite>("cat");
+        clueImages[16] = Resources.Load<Sprite>("cat");
+        clueImages[17] = Resources.Load<Sprite>("cat");
+        clueImages[18] = Resources.Load<Sprite>("cat");
+        clueImages[19] = Resources.Load<Sprite>("cat");
+        clueImages[20] = Resources.Load<Sprite>("cat");
+        clueImages[21] = Resources.Load<Sprite>("cat");
+        clueImages[22] = Resources.Load<Sprite>("cat");
+        clueImages[23] = Resources.Load<Sprite>("cat");
+        clueImages[24] = Resources.Load<Sprite>("cat");
+
     }
 
     //returns the name of the object based on the number that corresponds to it
@@ -89,11 +118,11 @@ public class ClueInformation : MonoBehaviour
     }
 
     //returns sprite to be used for Image
-    //  public Sprite getImage(int clueNumber) {
+      public Sprite getImage(int clueNumber) {
 
-    // return traits[clueNumber,];
-
-    //    }
+             return clueImages[clueNumber];
+        
+        }
 
 
 

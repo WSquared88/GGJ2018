@@ -92,9 +92,8 @@ public class Tab : MonoBehaviour
         if (clue1Valid)
         {
 
-            print("jafsdklfjklsdf");
 
-            //GameObject.Find("Image1").GetComponent<Image>().sprite = clue1.getImage();
+            GameObject.Find("Image1").GetComponent<Image>().sprite = clue1.getImage();
             GameObject.Find("Desc1").GetComponent<Text>().text = clue1.getClueDesc();
             GameObject.Find("Title1").GetComponent<Text>().text = clue1.getClueName();
 
@@ -102,13 +101,14 @@ public class Tab : MonoBehaviour
         }
         if (clue2Valid)
         {
-            //GameObject.Find("Image2").GetComponent<Image>().sprite = clue2.getImage();
+            GameObject.Find("Image2").GetComponent<Image>().sprite = clue2.getImage();
             GameObject.Find("Desc2").GetComponent<Text>().text = clue2.getClueDesc();
             GameObject.Find("Title2").GetComponent<Text>().text = clue2.getClueName();
 
         }
         else
         {
+            GameObject.Find("Image2").GetComponent<Image>().sprite = null;
             GameObject.Find("Desc2").GetComponent<Text>().text = "";
             GameObject.Find("Title2").GetComponent<Text>().text = "";
 
