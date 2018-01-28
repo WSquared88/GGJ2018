@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: StrengthOutline
+  m_Name: WeaknessOutline
   m_Shader: {fileID: 4800000, guid: a02f2fb7862bd0c42b19d1d87befdc3c, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4

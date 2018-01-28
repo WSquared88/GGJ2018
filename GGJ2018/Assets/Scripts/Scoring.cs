@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Scoring : MonoBehaviour {
     public string[] objectsFound;
+    public int playerScore;
     // Use this for initialization
     void Start () {
 		
@@ -12,12 +13,18 @@ public class Scoring : MonoBehaviour {
     {
         string[] objectsToBeFound = new string[4];
         objectsFound = new string[4];
-        int playerScore = 0;
+        playerScore = 0;
 
         objectsToBeFound[0] = monster.majorWeakness;
         objectsToBeFound[1] = monster.minorWeakness;
         objectsToBeFound[2] = monster.majorStrength;
         objectsToBeFound[3] = monster.minorStrength;
+
+        foreach(string clue in objectsToBeFound)
+        {
+            Debug.Log(clue);
+        }
+        Debug.Log(answers[0]);
 
         for(int i=0; i<objectsToBeFound.Length;i++)
         {
