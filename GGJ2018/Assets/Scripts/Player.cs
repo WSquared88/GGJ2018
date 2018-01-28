@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public Level_Journal journal;
 	public GameObject canvas;
 	Descriptor reminderText;
+    
 	// Use this for initialization
 	void Start ()
 	{
@@ -27,7 +28,7 @@ public class Player : MonoBehaviour
 			Debug.LogError("The sight line isn't set correctly. Setting to " + sightConeRadius);
 		}
         if (!journal) {
-            Debug.LogError("Journal not found");
+            //Debug.LogError("Journal not found");
             journal = GameObject.Find("JournalPREFAB").GetComponent<Level_Journal>();
 
         }
@@ -54,14 +55,14 @@ public class Player : MonoBehaviour
         if (isInteracting == true)
         {
             //freeze character movement
-            gameObject.GetComponent<FirstPersonController>().enabled = false;
-            
+            GameObject.Find("FPSController").GetComponent<FirstPersonController>().enabled = false;
+         
         }
-        else if(isInteracting==true && Input.GetKeyDown(KeyCode.Escape))
+        else if(isInteracting==true &&Input.GetKeyDown(KeyCode.Tab))
         {
             isInteracting = false;
             terminal.isInteracting = false;
-            gameObject.GetComponent<FirstPersonController>().enabled = true;
+            GameObject.Find("FPSController").GetComponent<FirstPersonController>().enabled = true;
         }
 	}
 

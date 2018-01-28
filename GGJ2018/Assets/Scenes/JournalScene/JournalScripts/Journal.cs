@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
+using UnityStandardAssets.Characters.FirstPerson;
+
 
 public class Journal : MonoBehaviour
 {
@@ -25,13 +27,13 @@ public class Journal : MonoBehaviour
 
         if (!player) {
 
-            Debug.LogError("Player not found");
-            //player = GameObject.Find("").GetComponent<Player>();
+           // Debug.LogError("Player not found");
+            player = GameObject.Find("FirstPersonCharacter").GetComponent<Player>();
         }
 
         if (!currentLevel) {
 
-            Debug.LogError("currentlevel not found");
+           // Debug.LogError("currentlevel not found");
             currentLevel = GameObject.Find("JournalPREFAB").GetComponent<Level_Journal>();
         }
     
@@ -74,11 +76,19 @@ public class Journal : MonoBehaviour
         if (isEnabled)
         {
             player.isInteracting = true;
-        }
-        else {
-            player.isInteracting = false;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
 
         }
+        else {
+            GameObject.Find("FPSController").GetComponent<FirstPersonController>().enabled = true;
+            Cursor.lockState = CursorLockMode.Confined;
+
+
+            player.isInteracting = false;
+            Cursor.visible = false;
+        }
+        
 
 
 
