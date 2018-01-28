@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public Level_Journal journal;
 	public GameObject canvas;
 	Descriptor reminderText;
+    
 	// Use this for initialization
 	void Start ()
 	{
@@ -27,12 +28,12 @@ public class Player : MonoBehaviour
 			Debug.LogError("The sight line isn't set correctly. Setting to " + sightConeRadius);
 		}
         if (!journal) {
-            Debug.LogError("Journal not found");
+            //Debug.LogError("Journal not found");
             journal = GameObject.Find("JournalPREFAB").GetComponent<Level_Journal>();
 
         }
 
-		//GameObject canvas = GameObject.Find("Reminder Text");
+		GameObject canvas = GameObject.Find("Reminder Text");
 		if (canvas)
 		{
 			reminderText = canvas.GetComponent<Descriptor>();
@@ -54,14 +55,14 @@ public class Player : MonoBehaviour
         if (isInteracting == true)
         {
             //freeze character movement
-            gameObject.GetComponent<FirstPersonController>().enabled = false;
-            
+            GameObject.Find("FPSController").GetComponent<FirstPersonController>().enabled = false;
+         
         }
-        else if(isInteracting==true && Input.GetKeyDown(KeyCode.Escape))
+        else if(isInteracting==true &&Input.GetKeyDown(KeyCode.Tab))
         {
             isInteracting = false;
             terminal.isInteracting = false;
-            gameObject.GetComponent<FirstPersonController>().enabled = true;
+            GameObject.Find("FPSController").GetComponent<FirstPersonController>().enabled = true;
         }
 	}
 
@@ -94,28 +95,31 @@ public class Player : MonoBehaviour
 		{
 			Debug.Log("There is an interactable nearby.");
 			InteractableObject interact = other.GetComponent<InteractableObject>();
-			if (CanSeeInteractable(interact, other))
+			if (interact)
 			{
-				interact.Highlight();
-				Vector3 playerToObject = interact.transform.position - transform.position;
-				if (playerToObject.magnitude <= interact.addToJournalDistance)
+				if (CanSeeInteractable(interact, other))
 				{
-					Debug.Log("The interactable is close enough to add to our journal.");
-					Info itemInfo = interact.giveStats();
-					Debug.Log(itemInfo);
-					reminderText.SetText(itemInfo.tagName);
-					reminderText.SetPosition(interact.transform.position);
-					reminderText.FadeIn();
-                    int numInList = interact.giveStats().numberInList;
-                    journal.addClue(numInList);
+					interact.Highlight();
+					Vector3 playerToObject = interact.transform.position - transform.position;
+					if (playerToObject.magnitude <= interact.addToJournalDistance)
+					{
+						Debug.Log("The interactable is close enough to add to our journal.");
+						Info itemInfo = interact.giveStats();
+						Debug.Log(itemInfo);
+						reminderText.SetText(itemInfo.tagName);
+						reminderText.SetPosition(interact.transform.position);
+						reminderText.FadeIn();
+						int numInList = interact.giveStats().numberInList;
+						journal.addClue(numInList);
 
-                   
+
+					}
 				}
-			}
-			else
-			{
-				reminderText.FadeOut();
-				interact.Unhighlight();
+				else
+				{
+					reminderText.FadeOut();
+					interact.Unhighlight();
+				}
 			}
 		}
 		else if (other.tag == "Terminal")
