@@ -26,44 +26,44 @@ public class GameManager : MonoBehaviour
 	public string hintListPath;
 	Monster culprit;
 
-	// Use this for initialization
-	void Start ()
+    private void Awake()
     {
-		GenerateMonsters();
-		GenerateHints();
+        GenerateMonsters();
+        GenerateHints();
 
-		if(monsters.Count == 0)
+        if (monsters.Count == 0)
         {
             Debug.LogError("There are no monsters to choose as escapees. Making a generic human escape instead.");
-			monsters.Add(
-				new Monster()
-				{
-					name = "Human",
-					majorWeakness = "Fire",
-					minorWeakness = "Poison",
-					majorStrength = "Water",
-					minorStrength = "Air",
-					FlavorOne = "Hammer",
-					FlavorTwo = "Hat"
-				}
-			);
+            monsters.Add(
+                new Monster()
+                {
+                    name = "Human",
+                    majorWeakness = "Fire",
+                    minorWeakness = "Poison",
+                    majorStrength = "Water",
+                    minorStrength = "Air",
+                    FlavorOne = "Hammer",
+                    FlavorTwo = "Hat"
+                }
+            );
         }
 
-		culprit = monsters[UnityEngine.Random.Range(0,monsters.Count)];
-		Debug.Log("The escaped monster is " + culprit.name);
+        culprit = monsters[UnityEngine.Random.Range(0, monsters.Count)];
+        Debug.Log("The escaped monster is " + culprit.name);
 
-		//Getting all of the spawners
-		GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");
+        if (hints.Count == 0)
+        {
+            Debug.LogError("There aren't any hints to pull from! Creating a default one");
+            hints.Add(new InteractableObject()
+            {
+                tagName = "Water",
+            });
+        }
+    }
 
-		if(hints.Count == 0)
-		{
-			Debug.LogError("There aren't any hints to pull from! Creating a default one");
-			hints.Add(new InteractableObject()
-			{
-				tagName = "Water",
-			});
-		}
-
+    // Use this for initialization
+    void Start ()
+    {
 		//GameObject majorWeakness;
 		//GameObject minorWeakness;
 		//GameObject majorStrength;
@@ -71,8 +71,10 @@ public class GameManager : MonoBehaviour
 		//GameObject FlavorOne;
 		//GameObject FlavorTwo;
 		List<InteractableObject> objsToSpawn = new List<InteractableObject>();
+        //Getting all of the spawners
+        GameObject[] spawners = GameObject.FindGameObjectsWithTag("Spawner");
 
-		Debug.Log("Looking for hints");
+        Debug.Log("Looking for hints");
 		for (int i = 0;i<hints.Count;i++)
 		{
 			if(hints[i].tagName == culprit.majorWeakness

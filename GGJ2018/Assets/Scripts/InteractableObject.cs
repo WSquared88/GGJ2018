@@ -32,7 +32,7 @@ public class InteractableObject : MonoBehaviour
 		objectRenderer = GetComponent<Renderer>();
 		childrenRenderers = GetComponentsInChildren<Renderer>();
 		objectRenderer.material = normalMaterial;
-
+        outlineMaterial = strengthMaterial;
 		for (int i = 0; i < childrenRenderers.Length; i++)
 		{
 			childrenRenderers[i].material = normalMaterial;
