@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class Level_Journal : MonoBehaviour
 {
 
-    int clueCount;
+    public int clueCount;
     int foundCount;
     int tabCount;
 
-    List<Clue> clueList = new List<Clue>();
+    public List<Clue> clueList = new List<Clue>();
     List<int> foundClues = new List<int>();
 
     bool isSolved;
@@ -37,9 +37,13 @@ public class Level_Journal : MonoBehaviour
 
     int waitingCount;
 
+    bool tempbool;
+
+
     // Use this for initialization
     void Start()
     {
+        tempbool = true;
 
         if (!theJournal) {
             Debug.LogError("Journal not found");
@@ -69,10 +73,13 @@ public class Level_Journal : MonoBehaviour
         tab1.isDisplayed = true;
 
 
-
+       
 
 
         switchTo1();
+
+      
+
 
     }
 
@@ -129,9 +136,25 @@ public class Level_Journal : MonoBehaviour
     //adds clue to the List of clues; instantiated at begining of level
     public void addClue(int clueNum)
     {
+
+
+
+
+        print("passed function pass");
         clueList.Add(Instantiate(clue));
+        print("passed instantiate clue");
         clueList[clueCount].setClueNum(clueNum);
+        print(clueList[clueCount].getClueName());
+        print("clueNum: "+clueNum);
+        
+        tempClue = clueList[clueCount];
+        print("tempClue name: "+tempClue.getClueName());
         clueCount++;
+        discoverClue(clueNum,tempClue);
+        print("addedclue: " + clueNum);
+          
+        
+        
     }
 
 
@@ -167,44 +190,41 @@ public class Level_Journal : MonoBehaviour
     //item is found, increase foundCount
     public void increaseFoundCount(int clueNum)
     {
+        print("foundcount: " + foundCount);
 
 
-
-
-        for (int i = 0; i < clueCount; i++)
+        if (foundCount > 5)
         {
 
-            if (clueList[i].getClueNum() == clueNum)
-            {
-
-                tempClue = clueList[i];
-            }
-
+            isSolved = true;
         }
+
+        //tabList[tabCount].setClue1(tempClue);
+
 
         if (foundCount <= 5)
         {
-
             if (foundCount == 0)
             {
                 tabList[tabCount].setClue1(tempClue);
-
+                tabList[tabCount].clue1Valid = true;
                 foundCount++;
+                print("foundcount2: " + foundCount);
             }
             else if (foundCount % 2 != 0)
             {
                 tabList[tabCount].setClue2(tempClue);
-                foundCount++;
-                if (foundCount > 5)
-                {
+                tabList[tabCount].clue2Valid = true;
 
-                    isSolved = true;
-                }
+                foundCount++;
+                
             }
             else
             {
                 tabCount++;
                 tabList[tabCount].setClue1(tempClue);
+                tabList[tabCount].clue1Valid = true;
+
                 foundCount++;
 
                 if (tabCount == 1)
@@ -227,20 +247,22 @@ public class Level_Journal : MonoBehaviour
     }
 
     //discovered clue
-    public void discoverClue(int clueNum)
+    public void discoverClue(int clueNum,Clue tempClue)
     {
 
         if (theJournal.getIsEnabled())
         {
-            increaseFoundCount(clueNum);
+            
+                increaseFoundCount(clueNum);
 
-
+            
         }
         else
         {
 
             waitingCount++;
             foundClues.Add(clueNum);
+            print("waitingcount: " + waitingCount);
 
         }
 
@@ -259,6 +281,7 @@ public class Level_Journal : MonoBehaviour
 
             }
             waitingCount = 0;
+            print("waitingcoung2: " + waitingCount);
             foundClues.Clear();
             tabList[0].fillScreen();
         }

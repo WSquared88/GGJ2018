@@ -46,10 +46,17 @@ public class Journal : MonoBehaviour
 
 
 
-
     }
 
 
+
+    public void printAddedClues() {
+        for (int i = 0; i < currentLevel.clueCount; i++) {
+            print(currentLevel.clueList[i]);
+
+        }
+
+    }
 
 
     public bool getIsEnabled()
@@ -69,7 +76,7 @@ public class Journal : MonoBehaviour
         {
             journalView.SetActive(!isEnabled);
             isEnabled = !isEnabled;
-
+            
 
         }
 

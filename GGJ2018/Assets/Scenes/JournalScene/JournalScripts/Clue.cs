@@ -50,7 +50,7 @@ public class Clue : MonoBehaviour
     public void setClueName()
     {
         clueName = GameObject.Find("JournalPREFAB").GetComponent<ClueInformation>().getName(clueNum);
-        //print(clueName);
+        print(clueName);
 
     }
 
