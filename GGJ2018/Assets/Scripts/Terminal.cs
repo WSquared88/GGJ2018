@@ -10,6 +10,7 @@ public class Terminal : InteractableObject {
     public Button optionOne;
     public Button optionTwo;
     public Button optionThree;
+    public Text scoreStuff;
     public List<string> guesses;
     public int menuScreenCount = 0;
     GameManager managerScript;
@@ -126,8 +127,14 @@ public class Terminal : InteractableObject {
         }
         else if(menuScreenCount == 5)
         {
-            isInteracting = false;
+
+            optionTwo.GetComponentInChildren<Text>().text = "Continue";
+            menuScreenCount++;
             //menuScreenCount = 0;
+        }
+        else if (menuScreenCount == 6)
+        {
+            isInteracting = false;
         }
     }
     public void SelectClues(string correctAnswer)
