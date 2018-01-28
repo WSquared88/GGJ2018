@@ -7,6 +7,8 @@ using UnityEditor;
 public class Journal : MonoBehaviour
 {
 
+    public Player player;
+
 
     bool newLevelStart;
 
@@ -21,6 +23,18 @@ public class Journal : MonoBehaviour
     void Start()
     {
 
+        if (!player) {
+
+            Debug.LogError("Player not found");
+            //player = GameObject.Find("").GetComponent<Player>();
+        }
+
+        if (!currentLevel) {
+
+            Debug.LogError("currentlevel not found");
+            currentLevel = GameObject.Find("JournalPREFAB").GetComponent<Level_Journal>();
+        }
+    
         newLevelStart = false;
         journalView = GameObject.Find("JournalView");
         isEnabled = false;
@@ -57,14 +71,18 @@ public class Journal : MonoBehaviour
 
         }
 
-
-
-
-        if (Input.GetKeyDown(KeyCode.A))
+        if (isEnabled)
         {
-            currentLevel.addClue(5);
-            currentLevel.discoverClue(5);
+            player.isInteracting = true;
         }
+        else {
+            player.isInteracting = false;
+
+        }
+
+
+
+
 
 
 

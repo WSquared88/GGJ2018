@@ -208,7 +208,7 @@ public class GameManager : MonoBehaviour
 			string[] words = line.Split('\t');
 			Debug.Log("Parsing out line: " + line);
 
-			if (words.Length < 3)
+			if (words.Length < 4)
 			{
 				Debug.LogError("The hint list isn't set up correctly.");
 			}
@@ -228,13 +228,15 @@ public class GameManager : MonoBehaviour
 				{
 					tagName = words[0],
 					flavorText = words[1],
-					seeDistance = int.Parse(words[2]),
+					addToJournalDistance = int.Parse(words[2]),
+                    numberInList = int.Parse(words[3]),
 				});
 
-				Debug.Log("Making a new hint." +
-					"\nTag Name: " + words[0] +
-					"\nFlavor Text: " + words[1] +
-					"\n Sight Distance: " + words[2]);
+                Debug.Log("Making a new hint." +
+                    "\nTag Name: " + words[0] +
+                    "\nFlavor Text: " + words[1] +
+                    "\n Sight Distance: " + words[2] +
+                    "\n Number in List: " + words[3]);
 			}
 		}
 	}

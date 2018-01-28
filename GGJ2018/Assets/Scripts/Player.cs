@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public Terminal terminal;
 	Camera camera;
 	public float sightConeRadius;
+    public Level_Journal journal;
 	// Use this for initialization
 	void Start ()
 	{
@@ -23,6 +24,11 @@ public class Player : MonoBehaviour
 			sightConeRadius = 35;
 			Debug.LogError("The sight line isn't set correctly. Setting to " + sightConeRadius);
 		}
+        if (!journal) {
+            Debug.LogError("Journal not found");
+            journal = GameObject.Find("JournalPREFAB").GetComponent<Level_Journal>();
+
+        }
 	}
 	
 	// Update is called once per frame
@@ -75,10 +81,15 @@ public class Player : MonoBehaviour
 			{
 				interact.Highlight();
 				Vector3 playerToObject = interact.transform.position - transform.position;
-				if (playerToObject.magnitude <= interact.seeDistance)
+				if (playerToObject.magnitude <= interact.addToJournalDistance)
 				{
 					Debug.Log("The interactable is close enough to add to our journal.");
 					Debug.Log(interact.giveStats());
+
+                    int numInList = interact.giveStats().numberInList;
+                    journal.addClue(numInList);
+
+                   
 				}
 			}
 			else
