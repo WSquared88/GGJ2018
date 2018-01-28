@@ -71,7 +71,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4357866944703204}
   m_Layer: 0
-  m_Name: acid
+  m_Name: slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
