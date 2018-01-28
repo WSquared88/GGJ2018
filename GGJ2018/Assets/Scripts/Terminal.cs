@@ -16,7 +16,7 @@ public class Terminal : InteractableObject {
     GameManager managerScript;
     public List<string> answers;
 
-    
+
     
 	// Use this for initialization
 	void Start () {
@@ -25,7 +25,8 @@ public class Terminal : InteractableObject {
         isReceiving = true;
         //gameObject.tag = tagName;
         isInteracting = false;
-        
+        outlineMaterial = strengthMaterial;
+
 
         optionOne.gameObject.SetActive(true);
         optionTwo.gameObject.SetActive(true);
