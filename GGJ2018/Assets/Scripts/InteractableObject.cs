@@ -21,7 +21,9 @@ public class InteractableObject : MonoBehaviour
 	Renderer objectRenderer;
 	Renderer[] childrenRenderers;
 	public Material normalMaterial;
-	public Material outlineMaterial;
+	public Material strengthMaterial;
+	public Material weaknessMaterial;
+	Material outlineMaterial;
 	bool highlighted = false;
 
 	// Use this for initialization
@@ -34,6 +36,11 @@ public class InteractableObject : MonoBehaviour
 		for (int i = 0; i < childrenRenderers.Length; i++)
 		{
 			childrenRenderers[i].material = normalMaterial;
+		}
+
+		if(!strengthMaterial || !weaknessMaterial)
+		{
+			Debug.LogError("The good and bad materials need to be set up.");
 		}
 
         gameObject.tag = "Interactable";
@@ -79,6 +86,12 @@ public class InteractableObject : MonoBehaviour
 		if (!highlighted)
 		{
 			Debug.Log("Highlighting");
+
+			if(!outlineMaterial)
+			{
+				Debug.LogError("The outline material wasn't set when trying to highlight!");
+			}
+
 			objectRenderer.material = outlineMaterial;
 
 			for (int i = 0; i < childrenRenderers.Length; i++)
@@ -104,6 +117,19 @@ public class InteractableObject : MonoBehaviour
 			}
 
 			highlighted = false;
+		}
+	}
+
+	public void SetIsShaderStrong(bool isGoodAlignment)
+	{
+		Debug.Log("Setting the alignment to " + isGoodAlignment);
+		if(isGoodAlignment)
+		{
+			outlineMaterial = strengthMaterial;
+		}
+		else
+		{
+			outlineMaterial = weaknessMaterial;
 		}
 	}
 }

@@ -92,17 +92,33 @@ public class GameManager : MonoBehaviour
 		for (int i = 0; i < objsToSpawn.Count && unusedSpawns.Count > 0; i++)
 		{
 			int currentSpawner = UnityEngine.Random.Range(0, unusedSpawns.Count);
-			UnityEngine.Object hint = Resources.Load(objsToSpawn[i].tagName);
+			GameObject hintObject = Resources.Load(objsToSpawn[i].tagName) as GameObject;
 
-			if (!hint)
+			if (!hintObject)
 			{
 				Debug.LogError("Unable to find " + objsToSpawn[i].tagName + " in the resourcers folder to load. Not spawning.");
 			}
 			else
 			{
 				Debug.Log("Spawning " + objsToSpawn[i].tagName + " at spawner number " + currentSpawner + " of " + unusedSpawns.Count + " at position " + unusedSpawns[currentSpawner].transform.position);
-				Instantiate(hint, unusedSpawns[currentSpawner].transform.position, Quaternion.identity);
+				GameObject spawnedHint = Instantiate(hintObject, unusedSpawns[currentSpawner].transform.position, Quaternion.identity);
 				unusedSpawns.RemoveAt(currentSpawner);
+				InteractableObject hint = spawnedHint.GetComponent<InteractableObject>();
+
+				if (!hint)
+				{
+					Debug.LogError("Unable to get the InteractableObject component from the spawned hint object");
+				}
+				else
+				{
+					hint.clueText = objsToSpawn[i].clueText;
+					hint.tagName = objsToSpawn[i].tagName;
+					hint.flavorText = objsToSpawn[i].flavorText;
+					hint.addToJournalDistance = objsToSpawn[i].addToJournalDistance;
+					hint.numberInList = objsToSpawn[i].numberInList;
+					hint.SetIsShaderStrong(hint.tagName == culprit.majorStrength
+											|| hint.tagName == culprit.minorStrength);
+				}
 			}
 		}
 
@@ -222,21 +238,24 @@ public class GameManager : MonoBehaviour
 				////};
 
 				//hint = GameObject.CreatePrimitive(PrimitiveType.Sphere).AddComponent<InteractableObject>();
-
+				int addToJournalDistance;
+				int numInList;
+				bool journalResult = int.TryParse(words[2], out addToJournalDistance);
+				bool numResult = int.TryParse(words[3], out numInList);
 
 				hints.Add(new InteractableObject()
 				{
 					tagName = words[0],
 					flavorText = words[1],
-					addToJournalDistance = int.Parse(words[2]),
-                    numberInList = int.Parse(words[3]),
+					addToJournalDistance = journalResult ? addToJournalDistance : 5,
+                    numberInList = numResult ? numInList : -1,
 				});
 
                 Debug.Log("Making a new hint." +
                     "\nTag Name: " + words[0] +
                     "\nFlavor Text: " + words[1] +
-                    "\n Sight Distance: " + words[2] +
-                    "\n Number in List: " + words[3]);
+                    "\n Sight Distance: " + (journalResult ? addToJournalDistance : 5) +
+                    "\n Number in List: " + (numResult ? numInList : -1));
 			}
 		}
 	}
