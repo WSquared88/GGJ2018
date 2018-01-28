@@ -6,6 +6,7 @@ public struct Info
 {
     public string clueName;
     public string flavorText;
+    public int numberInList;
     //weakness or strength
    // public string clueType;
 }
@@ -15,6 +16,7 @@ public class InteractableObject : MonoBehaviour
     public string clueText = "";
     public string flavorText = "";
     public string tagName = "";
+    public int numberInList;
 	Renderer objectRenderer;
 	Renderer[] childrenRenderers;
 	public Material normalMaterial;
@@ -56,6 +58,8 @@ public class InteractableObject : MonoBehaviour
         {
             clueName = "vool",
             flavorText = "Im very diabetic",
+            numberInList = numberInList,
+            
         };
       
      

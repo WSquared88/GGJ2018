@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public Terminal terminal;
 	Camera camera;
 	public float sightConeRadius;
+    Level_Journal journal;
 	// Use this for initialization
 	void Start ()
 	{
@@ -79,6 +80,11 @@ public class Player : MonoBehaviour
 				{
 					Debug.Log("The interactable is close enough to add to our journal.");
 					Debug.Log(interact.giveStats());
+
+                    int numInList = interact.giveStats().numberInList;
+                    journal.addClue(numInList);
+
+                   
 				}
 			}
 			else

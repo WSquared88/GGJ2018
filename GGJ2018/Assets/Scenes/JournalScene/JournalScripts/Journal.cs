@@ -7,6 +7,8 @@ using UnityEditor;
 public class Journal : MonoBehaviour
 {
 
+    public Player player;
+
 
     bool newLevelStart;
 
@@ -20,6 +22,8 @@ public class Journal : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+
+        
 
         newLevelStart = false;
         journalView = GameObject.Find("JournalView");
@@ -54,6 +58,15 @@ public class Journal : MonoBehaviour
             journalView.SetActive(!isEnabled);
             isEnabled = !isEnabled;
 
+
+        }
+
+        if (isEnabled)
+        {
+            player.isInteracting = true;
+        }
+        else {
+            player.isInteracting = false;
 
         }
 
