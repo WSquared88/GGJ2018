@@ -10,7 +10,7 @@ public class Clue : MonoBehaviour
     int clueNum;
 
     string clueName;
-    Image clueImage;
+    Sprite clueImage;
     string clueDescription;
 
     bool isDiscovered;
@@ -34,7 +34,7 @@ public class Clue : MonoBehaviour
     {
         clueNum = sentClueNum;
         setClueName();
-        // setClueImage();
+        setClueImage();
         setClueDesc();
 
     }
@@ -62,14 +62,14 @@ public class Clue : MonoBehaviour
     }
 
     //sets clue Image, goes through potential objects and then selects the corresponding sprite
-    //public void setClueImage() {
-    //clueImage.sprite = clueInfo.getImage(clueNum);
+    public void setClueImage() {
+        clueImage = GameObject.Find("JournalPREFAB").GetComponent<ClueInformation>().getImage(clueNum);
 
-    // }
+     }
 
 
     //set journal Image
-    public Image setJournalImage()
+    public Sprite getImage()
     {
         return clueImage;
 
