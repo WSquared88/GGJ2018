@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -23,6 +24,7 @@ public class GameManager : MonoBehaviour
 	public string monsterListPath;
 	[Tooltip("Filepath to the csv used for hint generation. Starts in the Assets folder. Ex: Assets/hints.csv")]
 	public string hintListPath;
+	Monster culprit;
 
 	// Use this for initialization
 	void Start ()
@@ -34,7 +36,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogError("There are no monsters to choose as escapees. Making a generic human escape instead.");
 			monsters.Add(
-				new Monster
+				new Monster()
 				{
 					name = "Human",
 					majorWeakness = "Fire",
@@ -47,7 +49,7 @@ public class GameManager : MonoBehaviour
 			);
         }
 
-		Monster culprit = monsters[Random.Range(0,monsters.Count)];
+		culprit = monsters[UnityEngine.Random.Range(0,monsters.Count)];
 		Debug.Log("The escaped monster is " + culprit.name);
 
 		//Getting all of the spawners
@@ -56,13 +58,10 @@ public class GameManager : MonoBehaviour
 		if(hints.Count == 0)
 		{
 			Debug.LogError("There aren't any hints to pull from! Creating a default one");
-			hints = new List<InteractableObject>
+			hints.Add(new InteractableObject()
 			{
-				new InteractableObject()
-				{
-					tagName = "Water"
-				},
-			};
+				tagName = "Water",
+			});
 		}
 
 		//GameObject majorWeakness;
@@ -83,19 +82,38 @@ public class GameManager : MonoBehaviour
 				|| hints[i].tagName == culprit.FlavorOne
 				|| hints[i].tagName == culprit.FlavorTwo)
 			{
-				Debug.Log("Found a hint for the monster.");
+				Debug.Log("Found a " + hints[i].tagName + " for the monster.");
 				objsToSpawn.Add(hints[i]);
 			}
 		}
 
-		for (int i = 0; i < objsToSpawn.Count; i++)
+		List<GameObject> unusedSpawns = new List<GameObject>(spawners);
+
+		for (int i = 0; i < objsToSpawn.Count && unusedSpawns.Count > 0; i++)
 		{
-			if(i < spawners.Length)
+			int currentSpawner = UnityEngine.Random.Range(0, unusedSpawns.Count);
+			UnityEngine.Object hint = Resources.Load(objsToSpawn[i].tagName);
+
+			if (!hint)
 			{
-				Debug.Log("Spawning " + objsToSpawn[i].tagName + " at a spawner");
-				Instantiate(objsToSpawn[i], spawners[i].transform.position, Quaternion.identity);
+				Debug.LogError("Unable to find " + objsToSpawn[i].tagName + " in the resourcers folder to load. Not spawning.");
+			}
+			else
+			{
+				Debug.Log("Spawning " + objsToSpawn[i].tagName + " at spawner number " + currentSpawner + " of " + unusedSpawns.Count + " at position " + unusedSpawns[currentSpawner].transform.position);
+				Instantiate(hint, unusedSpawns[currentSpawner].transform.position, Quaternion.identity);
+				unusedSpawns.RemoveAt(currentSpawner);
 			}
 		}
+
+		//for (int i = 0; i < objsToSpawn.Count; i++)
+		//{
+		//	if(i < spawners.Length)
+		//	{
+		//		Debug.Log("Spawning " + objsToSpawn[i].tagName + " at a spawner");
+		//		Instantiate(objsToSpawn[i], spawners[i].transform.position, Quaternion.identity);
+		//	}
+		//}
 	}
 	
 	// Update is called once per frame
@@ -116,6 +134,11 @@ public class GameManager : MonoBehaviour
 		catch (FileNotFoundException)
 		{
 			Debug.LogError("The monster file was not in the location specified! Aborting monster generation!");
+			return;
+		}
+		catch (ArgumentException)
+		{
+			Debug.LogError("No monster file path was provided! Aborting monster generation!");
 			return;
 		}
 
@@ -171,6 +194,11 @@ public class GameManager : MonoBehaviour
 			Debug.LogError("The hint file was not in the location specified! Aborting hint generation!");
 			return;
 		}
+		catch(ArgumentException)
+		{
+			Debug.LogError("No hint file path was provided! Aborting hint generation!");
+			return;
+		}
 
 		reader.ReadLine();
 
@@ -186,8 +214,17 @@ public class GameManager : MonoBehaviour
 			}
 			else
 			{
+				//InteractableObject hint;// = new InteractableObject
+				////{
+				////	tagName = words[0],
+				////	flavorText = words[1],
+				////	seeDistance = int.Parse(words[2]),
+				////};
 
-				hints.Add(new InteractableObject
+				//hint = GameObject.CreatePrimitive(PrimitiveType.Sphere).AddComponent<InteractableObject>();
+
+
+				hints.Add(new InteractableObject()
 				{
 					tagName = words[0],
 					flavorText = words[1],
@@ -199,6 +236,19 @@ public class GameManager : MonoBehaviour
 					"\nFlavor Text: " + words[1] +
 					"\n Sight Distance: " + words[2]);
 			}
+		}
+	}
+
+	void SubmitAnswers(List<string> answers)
+	{
+
+	}
+
+	Monster Culprit
+	{
+		get
+		{
+			return culprit;
 		}
 	}
 }

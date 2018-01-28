@@ -7,7 +7,7 @@ public struct Info
     public string clueName;
     public string flavorText;
     //weakness or strength
-    public string clueType;
+   // public string clueType;
 }
 public class InteractableObject : MonoBehaviour
 {
@@ -24,7 +24,7 @@ public class InteractableObject : MonoBehaviour
 	{
 		objectRenderer = GetComponent<Renderer>();
 		objectRenderer.material = normalMaterial;
-        gameObject.tag = tagName;
+        gameObject.tag = "Interactable";
 
 		if(seeDistance <= 0)
 		{
