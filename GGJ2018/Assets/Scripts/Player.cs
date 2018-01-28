@@ -14,6 +14,9 @@ public class Player : MonoBehaviour
     public Level_Journal journal;
 	public GameObject canvas;
 	Descriptor reminderText;
+    public GameObject terminalSpot;
+    
+
     
 	// Use this for initialization
 	void Start ()
@@ -65,6 +68,17 @@ public class Player : MonoBehaviour
             isInteracting = false;
             terminal.isInteracting = false;
             GameObject.Find("FPSController").GetComponent<FirstPersonController>().enabled = true;
+        }
+        if((gameObject.transform.position-terminalSpot.transform.position).magnitude<=5f && Input.GetKeyDown(KeyCode.E) && isInteracting == false) 
+        {
+            terminal.isInteracting = true;
+            terminal.canvas.SetActive(terminal.isInteracting);
+        }
+        else if (isInteracting==true && Input.GetKeyDown(KeyCode.Escape))
+        {
+            terminal.isInteracting = false;
+            isInteracting = false;
+            terminal.canvas.SetActive(terminal.isInteracting);
         }
 	}
 
