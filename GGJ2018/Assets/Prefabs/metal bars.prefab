@@ -84,7 +84,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4495549886869576}
   m_Layer: 0
-  m_Name: MetalBars
+  m_Name: metal bars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

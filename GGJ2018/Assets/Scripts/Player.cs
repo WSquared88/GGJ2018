@@ -5,6 +5,8 @@ using UnityStandardAssets.Characters.FirstPerson;
 
 public class Player : MonoBehaviour
 {
+    public AudioClip doorSound;
+    public AudioSource audioSource;
     public bool isInteracting = false;
     public Terminal terminal;
 	Camera camera;
@@ -12,6 +14,9 @@ public class Player : MonoBehaviour
     public Level_Journal journal;
 	public GameObject canvas;
 	Descriptor reminderText;
+    public GameObject terminalSpot;
+    
+
     
 	// Use this for initialization
 	void Start ()
@@ -64,6 +69,17 @@ public class Player : MonoBehaviour
             terminal.isInteracting = false;
             GameObject.Find("FPSController").GetComponent<FirstPersonController>().enabled = true;
         }
+        if((gameObject.transform.position-terminalSpot.transform.position).magnitude<=5f && Input.GetKeyDown(KeyCode.E) && isInteracting == false) 
+        {
+            terminal.isInteracting = true;
+            terminal.canvas.SetActive(terminal.isInteracting);
+        }
+        else if (isInteracting==true && Input.GetKeyDown(KeyCode.Escape))
+        {
+            terminal.isInteracting = false;
+            isInteracting = false;
+            terminal.canvas.SetActive(terminal.isInteracting);
+        }
 	}
 
 	bool CanSeeInteractable(InteractableObject interactable, Collider interactableCollider)
@@ -88,8 +104,16 @@ public class Player : MonoBehaviour
 	{
 
 	}
+    public void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag=="doorAound")
+        {
+            audioSource.Play();
+            audioSource.Stop();
+        }
+    }
 
-	private void OnTriggerStay(Collider other)
+    private void OnTriggerStay(Collider other)
     {
 		if (other.tag == "Interactable")
 		{

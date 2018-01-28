@@ -23,7 +23,7 @@ public class InteractableObject : MonoBehaviour
 	public Material normalMaterial;
 	public Material strengthMaterial;
 	public Material weaknessMaterial;
-	Material outlineMaterial;
+	protected Material outlineMaterial;
 	bool highlighted = false;
 
 	// Use this for initialization
@@ -32,7 +32,6 @@ public class InteractableObject : MonoBehaviour
 		objectRenderer = GetComponent<Renderer>();
 		childrenRenderers = GetComponentsInChildren<Renderer>();
 		objectRenderer.material = normalMaterial;
-
 		for (int i = 0; i < childrenRenderers.Length; i++)
 		{
 			childrenRenderers[i].material = normalMaterial;
