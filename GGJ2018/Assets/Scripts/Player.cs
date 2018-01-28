@@ -10,6 +10,8 @@ public class Player : MonoBehaviour
 	Camera camera;
 	public float sightConeRadius;
     public Level_Journal journal;
+	public GameObject canvas;
+	Descriptor reminderText;
 	// Use this for initialization
 	void Start ()
 	{
@@ -29,6 +31,21 @@ public class Player : MonoBehaviour
             journal = GameObject.Find("JournalPREFAB").GetComponent<Level_Journal>();
 
         }
+
+		//GameObject canvas = GameObject.Find("Reminder Text");
+		if (canvas)
+		{
+			reminderText = canvas.GetComponent<Descriptor>();
+		}
+		else
+		{
+			Debug.LogError("The reminder text canvas isn't here!");
+		}
+
+		if(!reminderText)
+		{
+			Debug.LogError("The description canvas isn't attached!");
+		}
 	}
 	
 	// Update is called once per frame
@@ -84,8 +101,11 @@ public class Player : MonoBehaviour
 				if (playerToObject.magnitude <= interact.addToJournalDistance)
 				{
 					Debug.Log("The interactable is close enough to add to our journal.");
-					Debug.Log(interact.giveStats());
-
+					Info itemInfo = interact.giveStats();
+					Debug.Log(itemInfo);
+					reminderText.SetText(itemInfo.tagName);
+					reminderText.SetPosition(interact.transform.position);
+					reminderText.FadeIn();
                     int numInList = interact.giveStats().numberInList;
                     journal.addClue(numInList);
 
@@ -94,6 +114,7 @@ public class Player : MonoBehaviour
 			}
 			else
 			{
+				reminderText.FadeOut();
 				interact.Unhighlight();
 			}
 		}
@@ -116,6 +137,7 @@ public class Player : MonoBehaviour
 			if (interactable)
 			{
 				interactable.Unhighlight();
+				reminderText.FadeOut();
 			}
 		}
 	}
