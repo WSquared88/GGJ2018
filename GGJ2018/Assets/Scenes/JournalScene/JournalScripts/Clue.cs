@@ -49,7 +49,7 @@ public class Clue : MonoBehaviour
     //sets clue name
     public void setClueName()
     {
-        clueName = GameObject.Find("JournalPREFAB").GetComponent<ClueInformation>().getName(clueNum);
+        clueName = GameObject.Find("JournalPREFAB").GetComponent<ClueInformation>().getName(clueNum-1);
         print(clueName);
 
     }
@@ -63,7 +63,7 @@ public class Clue : MonoBehaviour
 
     //sets clue Image, goes through potential objects and then selects the corresponding sprite
     public void setClueImage() {
-        clueImage = GameObject.Find("JournalPREFAB").GetComponent<ClueInformation>().getImage(clueNum);
+        clueImage = GameObject.Find("JournalPREFAB").GetComponent<ClueInformation>().getImage(clueNum-1);
 
      }
 
@@ -79,7 +79,7 @@ public class Clue : MonoBehaviour
     //sets Clue description
     public void setClueDesc()
     {
-        clueDescription = GameObject.Find("JournalPREFAB").GetComponent<ClueInformation>().getDesc(clueNum);
+        clueDescription = GameObject.Find("JournalPREFAB").GetComponent<ClueInformation>().getDesc(clueNum-1);
         // print(clueDescription);
 
     }
