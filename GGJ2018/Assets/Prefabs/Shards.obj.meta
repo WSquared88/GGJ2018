@@ -1,0 +1,242 @@
+fileFormatVersion: 2
+guid: 80c696d24edf3004e875a9ac66a33683
+timeCreated: 1517085792
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: shard11_solidShatter2
+    100002: shard1_solidShatter1
+    100004: //RootNode
+    100006: solidShatter1_shard10
+    100008: solidShatter1_shard2
+    100010: solidShatter1_shard3
+    100012: solidShatter1_shard4
+    100014: solidShatter1_shard5
+    100016: solidShatter1_shard6
+    100018: solidShatter1_shard7
+    100020: solidShatter1_shard8
+    100022: solidShatter1_shard9
+    100024: solidShatter2_shard12
+    100026: solidShatter2_shard13
+    100028: solidShatter2_shard14
+    100030: solidShatter2_shard15
+    100032: solidShatter2_shard16
+    100034: solidShatter2_shard17
+    100036: solidShatter2_shard18
+    100038: solidShatter2_shard19
+    100040: solidShatter2_shard20
+    100042: solidShatter2_shard21
+    100044: solidShatter2_shard22
+    100046: solidShatter2_shard23
+    100048: solidShatter2_shard24
+    100050: solidShatter2_shard25
+    100052: solidShatter2_shard26
+    100054: solidShatter2_shard27
+    100056: solidShatter2_shard28
+    100058: solidShatter2_shard29
+    100060: solidShatter2_shard30
+    400000: shard11_solidShatter2
+    400002: shard1_solidShatter1
+    400004: //RootNode
+    400006: solidShatter1_shard10
+    400008: solidShatter1_shard2
+    400010: solidShatter1_shard3
+    400012: solidShatter1_shard4
+    400014: solidShatter1_shard5
+    400016: solidShatter1_shard6
+    400018: solidShatter1_shard7
+    400020: solidShatter1_shard8
+    400022: solidShatter1_shard9
+    400024: solidShatter2_shard12
+    400026: solidShatter2_shard13
+    400028: solidShatter2_shard14
+    400030: solidShatter2_shard15
+    400032: solidShatter2_shard16
+    400034: solidShatter2_shard17
+    400036: solidShatter2_shard18
+    400038: solidShatter2_shard19
+    400040: solidShatter2_shard20
+    400042: solidShatter2_shard21
+    400044: solidShatter2_shard22
+    400046: solidShatter2_shard23
+    400048: solidShatter2_shard24
+    400050: solidShatter2_shard25
+    400052: solidShatter2_shard26
+    400054: solidShatter2_shard27
+    400056: solidShatter2_shard28
+    400058: solidShatter2_shard29
+    400060: solidShatter2_shard30
+    2300000: shard11_solidShatter2
+    2300002: shard1_solidShatter1
+    2300004: solidShatter1_shard10
+    2300006: solidShatter1_shard2
+    2300008: solidShatter1_shard3
+    2300010: solidShatter1_shard4
+    2300012: solidShatter1_shard5
+    2300014: solidShatter1_shard6
+    2300016: solidShatter1_shard7
+    2300018: solidShatter1_shard8
+    2300020: solidShatter1_shard9
+    2300022: solidShatter2_shard12
+    2300024: solidShatter2_shard13
+    2300026: solidShatter2_shard14
+    2300028: solidShatter2_shard15
+    2300030: solidShatter2_shard16
+    2300032: solidShatter2_shard17
+    2300034: solidShatter2_shard18
+    2300036: solidShatter2_shard19
+    2300038: solidShatter2_shard20
+    2300040: solidShatter2_shard21
+    2300042: solidShatter2_shard22
+    2300044: solidShatter2_shard23
+    2300046: solidShatter2_shard24
+    2300048: solidShatter2_shard25
+    2300050: solidShatter2_shard26
+    2300052: solidShatter2_shard27
+    2300054: solidShatter2_shard28
+    2300056: solidShatter2_shard29
+    2300058: solidShatter2_shard30
+    3300000: shard11_solidShatter2
+    3300002: shard1_solidShatter1
+    3300004: solidShatter1_shard10
+    3300006: solidShatter1_shard2
+    3300008: solidShatter1_shard3
+    3300010: solidShatter1_shard4
+    3300012: solidShatter1_shard5
+    3300014: solidShatter1_shard6
+    3300016: solidShatter1_shard7
+    3300018: solidShatter1_shard8
+    3300020: solidShatter1_shard9
+    3300022: solidShatter2_shard12
+    3300024: solidShatter2_shard13
+    3300026: solidShatter2_shard14
+    3300028: solidShatter2_shard15
+    3300030: solidShatter2_shard16
+    3300032: solidShatter2_shard17
+    3300034: solidShatter2_shard18
+    3300036: solidShatter2_shard19
+    3300038: solidShatter2_shard20
+    3300040: solidShatter2_shard21
+    3300042: solidShatter2_shard22
+    3300044: solidShatter2_shard23
+    3300046: solidShatter2_shard24
+    3300048: solidShatter2_shard25
+    3300050: solidShatter2_shard26
+    3300052: solidShatter2_shard27
+    3300054: solidShatter2_shard28
+    3300056: solidShatter2_shard29
+    3300058: solidShatter2_shard30
+    4300000: shard11_solidShatter2
+    4300002: shard1_solidShatter1
+    4300004: solidShatter1_shard10
+    4300006: solidShatter1_shard2
+    4300008: solidShatter1_shard3
+    4300010: solidShatter1_shard4
+    4300012: solidShatter1_shard5
+    4300014: solidShatter1_shard6
+    4300016: solidShatter1_shard7
+    4300018: solidShatter1_shard8
+    4300020: solidShatter1_shard9
+    4300022: solidShatter2_shard12
+    4300024: solidShatter2_shard13
+    4300026: solidShatter2_shard14
+    4300028: solidShatter2_shard15
+    4300030: solidShatter2_shard16
+    4300032: solidShatter2_shard17
+    4300034: solidShatter2_shard18
+    4300036: solidShatter2_shard19
+    4300038: solidShatter2_shard20
+    4300040: solidShatter2_shard21
+    4300042: solidShatter2_shard22
+    4300044: solidShatter2_shard23
+    4300046: solidShatter2_shard24
+    4300048: solidShatter2_shard25
+    4300050: solidShatter2_shard26
+    4300052: solidShatter2_shard27
+    4300054: solidShatter2_shard28
+    4300056: solidShatter2_shard29
+    4300058: solidShatter2_shard30
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: phong2SG
+    second: {fileID: 2100000, guid: 5e5564bb585fedf4c85bef7f5e3190d1, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -24,7 +24,15 @@ public class LightFlicker : MonoBehaviour {
             sum += smoothing[i - 1];
         }
         smoothing[smoothing.Length - 1] = Random.value;
+        float lightToggle = Random.value;
         sum += smoothing[smoothing.Length - 1];
-        lights.intensity = sum / smoothing.Length;
+        if (lightToggle < .5)
+        {
+            lights.intensity = sum / smoothing.Length / 2;
+        }
+        else
+        {
+            lights.intensity = sum / smoothing.Length;
+        }
 	}
 }
