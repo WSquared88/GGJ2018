@@ -8,7 +8,7 @@ public class Scoring : MonoBehaviour {
     void Start () {
 		
 	}
-	public int Score(Monster monster, string[] answers)
+	public int Score(Monster monster, List<string> answers)
     {
         string[] objectsToBeFound = new string[4];
         objectsFound = new string[4];
