@@ -37,13 +37,11 @@ public class Level_Journal : MonoBehaviour
 
     int waitingCount;
 
-    bool tempbool;
 
 
     // Use this for initialization
     void Start()
     {
-        tempbool = true;
 
         if (!theJournal) {
             Debug.LogError("Journal not found");
@@ -137,22 +135,30 @@ public class Level_Journal : MonoBehaviour
     public void addClue(int clueNum)
     {
 
+        bool tempBool = true;
 
+        if (clueCount > 0) {
+            for (int i = 0; i < clueCount; i++) {
+                if (clueList[i].getClueNum() == clueNum) {
+                    tempBool = false;
 
+                }
 
-        print("passed function pass");
-        clueList.Add(Instantiate(clue));
-        print("passed instantiate clue");
-        clueList[clueCount].setClueNum(clueNum);
-        print(clueList[clueCount].getClueName());
-        print("clueNum: "+clueNum);
-        
-        tempClue = clueList[clueCount];
-        print("tempClue name: "+tempClue.getClueName());
-        clueCount++;
-        discoverClue(clueNum,tempClue);
-        print("addedclue: " + clueNum);
-          
+            }
+            
+
+        }
+        if (tempBool)
+        {
+            print("CLUENUM: " + clueNum);
+            clueList.Add(Instantiate(clue));
+            clueList[clueCount].setClueNum(clueNum);
+            print(clueList[clueCount].getClueName());
+
+            tempClue = clueList[clueCount];
+            clueCount++;
+            discoverClue(clueNum, tempClue);
+        }
         
         
     }

@@ -75,26 +75,26 @@ public class ClueInformation : MonoBehaviour
 
         //images
 
-        clueImages[0]= Resources.Load<Sprite>("cat");
-        clueImages[1] = Resources.Load<Sprite>("cat");
-        clueImages[2] = Resources.Load<Sprite>("cat");
-        clueImages[3] = Resources.Load<Sprite>("cat");
-        clueImages[4] = Resources.Load<Sprite>("cat");
+        clueImages[0]= Resources.Load<Sprite>("garlicjar");
+        clueImages[1] = Resources.Load<Sprite>("sunJar");
+        clueImages[2] = Resources.Load<Sprite>("blood");
+        clueImages[3] = Resources.Load<Sprite>("normalBullets");
+        clueImages[4] = Resources.Load<Sprite>("glassShards");
         clueImages[5] = Resources.Load<Sprite>("cat");
         clueImages[6] = Resources.Load<Sprite>("cat");
-        clueImages[7] = Resources.Load<Sprite>("cat");
-        clueImages[8] = Resources.Load<Sprite>("cat");
+        clueImages[7] = Resources.Load<Sprite>("wolfsBane");
+        clueImages[8] = Resources.Load<Sprite>("silverbullets");
         clueImages[9] = Resources.Load<Sprite>("cat");
-        clueImages[10] = Resources.Load<Sprite>("cat");
-        clueImages[11] = Resources.Load<Sprite>("cat");
+        clueImages[10] = Resources.Load<Sprite>("fireJar");
+        clueImages[11] = Resources.Load<Sprite>("waterJar");
         clueImages[12] = Resources.Load<Sprite>("cat");
         clueImages[13] = Resources.Load<Sprite>("cat");
         clueImages[14] = Resources.Load<Sprite>("cat");
-        clueImages[15] = Resources.Load<Sprite>("cat");
+        clueImages[15] = Resources.Load<Sprite>("iceJar");
         clueImages[16] = Resources.Load<Sprite>("cat");
         clueImages[17] = Resources.Load<Sprite>("cat");
         clueImages[18] = Resources.Load<Sprite>("cat");
-        clueImages[19] = Resources.Load<Sprite>("cat");
+        clueImages[19] = Resources.Load<Sprite>("metalBars");
         clueImages[20] = Resources.Load<Sprite>("cat");
         clueImages[21] = Resources.Load<Sprite>("cat");
         clueImages[22] = Resources.Load<Sprite>("cat");

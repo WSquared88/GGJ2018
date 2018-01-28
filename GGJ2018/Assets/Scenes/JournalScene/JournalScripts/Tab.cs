@@ -55,7 +55,6 @@ public class Tab : MonoBehaviour
     public void setClue1(Clue sentClue)
     {
         clue1 = sentClue;
-        print("clue1 name: " + clue1.getClueName()+" hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
         clue1Valid = true;
 
     }
