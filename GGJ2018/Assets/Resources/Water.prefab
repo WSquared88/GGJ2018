@@ -123,9 +123,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f048f6eb432624ca8a3b38fbedd708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  addToJournalDistance: 0
+  addToJournalDistance: 5
   clueText: 
-  flavorText: 
-  tagName: Water
+  flavorText: Salt water isn't great for consumption
+  tagName: water
+  numberInList: 12
   normalMaterial: {fileID: 2100000, guid: 9eecb2fa4f931c24091f500906e7714c, type: 2}
-  outlineMaterial: {fileID: 2100000, guid: 2e1cdc225d1c06a42a8e303f15e45fce, type: 2}
+  strengthMaterial: {fileID: 2100000, guid: 2e1cdc225d1c06a42a8e303f15e45fce, type: 2}
+  weaknessMaterial: {fileID: 2100000, guid: fb359ec08d3dac2448d74b781a04e670, type: 2}

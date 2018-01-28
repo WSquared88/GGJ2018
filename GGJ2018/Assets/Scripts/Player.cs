@@ -120,7 +120,9 @@ public class Player : MonoBehaviour
 						reminderText.SetPosition(interact.transform.position);
 						reminderText.FadeIn();
 						int numInList = interact.giveStats().numberInList;
-						journal.addClue(numInList);
+                        print("adding to journal: " + numInList);
+                        journal.addClue(numInList);
+                        
 
 
 					}
