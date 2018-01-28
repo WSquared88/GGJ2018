@@ -228,7 +228,7 @@ public class GameManager : MonoBehaviour
 				{
 					tagName = words[0],
 					flavorText = words[1],
-					seeDistance = int.Parse(words[2]),
+					addToJournalDistance = int.Parse(words[2]),
 				});
 
 				Debug.Log("Making a new hint." +

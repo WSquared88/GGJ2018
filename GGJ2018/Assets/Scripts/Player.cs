@@ -75,7 +75,7 @@ public class Player : MonoBehaviour
 			{
 				interact.Highlight();
 				Vector3 playerToObject = interact.transform.position - transform.position;
-				if (playerToObject.magnitude <= interact.seeDistance)
+				if (playerToObject.magnitude <= interact.addToJournalDistance)
 				{
 					Debug.Log("The interactable is close enough to add to our journal.");
 					Debug.Log(interact.giveStats());

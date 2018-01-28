@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0f048f6eb432624ca8a3b38fbedd708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seeDistance: 0
+  addToJournalDistance: 0
   clueText: 
   flavorText: 
   tagName: Fire
